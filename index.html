@@ -3,79 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A.S Prestador - Especialistas em Automação Industrial, Automação Residencial, Elétrica Industrial e Elétrica Residencial">
     <title>A.S Prestador - Automação, Elétrica e Climatização</title>
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <!-- Header -->
-    <header class="header" id="header">
-        <div class="container">
-            <div class="nav-brand">
-                <img src="assets/images/logo.jpg" alt="A.S Prestador" class="logo">
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <img src="assets/images/logo.jpg" alt="A.S Prestador" class="logo">
+                </div>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#home" class="nav-link">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#about" class="nav-link">Sobre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#services" class="nav-link">Serviços</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#portfolio" class="nav-link">Portfólio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#videos" class="nav-link">Vídeos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-link">Contato</a>
+                    </li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
             </div>
-            <nav class="nav-menu" id="nav-menu">
-                <a href="#inicio" class="nav-link">Início</a>
-                <a href="#sobre" class="nav-link">Sobre</a>
-                <a href="#servicos" class="nav-link">Serviços</a>
-                <a href="#portfolio" class="nav-link">Portfólio</a>
-                <a href="#videos" class="nav-link">Vídeos</a>
-                <a href="#contato" class="nav-link">Contato</a>
-            </nav>
-            <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
+        </nav>
     </header>
 
     <!-- Hero Section -->
-    <section id="inicio" class="hero">
-        <div class="container">
+    <section id="home" class="hero">
+        <div class="hero-container">
             <div class="hero-content">
                 <h1 class="hero-title">
-                    <span class="brand-name">A.S PRESTADOR</span>
-                    <span class="hero-subtitle">Entregando Excelência</span>
+                    <span class="highlight">A.S PRESTADOR</span>
+                    <br>Entregando Excelência
                 </h1>
-                <p class="hero-description">
+                <p class="hero-subtitle">
                     Especialistas em Automação, Instalações Elétricas e Climatização
                 </p>
                 <div class="hero-buttons">
-                    <a href="#servicos" class="btn btn-primary">Nossos Serviços</a>
-                    <a href="#contato" class="btn btn-secondary">Entre em Contato</a>
+                    <a href="#services" class="btn btn-primary">Nossos Serviços</a>
+                    <a href="#contact" class="btn btn-secondary">Entre em Contato</a>
                 </div>
             </div>
-            <div class="hero-cards">
-                <div class="hero-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="card-icon">⚙️</div>
-                    <h3>Automação</h3>
-                </div>
-                <div class="hero-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="card-icon">⚡</div>
-                    <h3>Elétrica</h3>
-                </div>
-                <div class="hero-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="card-icon">❄️</div>
-                    <h3>Climatização</h3>
+            <div class="hero-image">
+                <div class="floating-cards">
+                    <div class="card card-1">
+                        <i class="fas fa-cogs"></i>
+                        <span>Automação</span>
+                    </div>
+                    <div class="card card-2">
+                        <i class="fas fa-bolt"></i>
+                        <span>Elétrica</span>
+                    </div>
+                    <div class="card card-3">
+                        <i class="fas fa-snowflake"></i>
+                        <span>Climatização</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="sobre" class="about">
+    <section id="about" class="about">
         <div class="container">
-            <div class="section-header" data-aos="fade-up">
+            <div class="section-header">
                 <h2 class="section-title">Sobre Mim</h2>
                 <div class="section-line"></div>
             </div>
-            
             <div class="about-content">
-                <div class="about-text" data-aos="fade-right">
+                <div class="about-text">
                     <p>Sou um profissional apaixonado por transformar ideias em resultados criativos e funcionais. Com experiência sólida em Automação, elétrica e climatização, desenvolvo projetos que equilibram estética, estratégia e inovação.</p>
                     
                     <p>Ao longo da minha jornada, tive a oportunidade de colaborar com empresas, marcas e pessoas que buscam soluções personalizadas e impactantes. Este portfólio reúne alguns dos meus principais trabalhos, refletindo meu olhar atento aos detalhes, comprometimento com a excelência e constante busca por evolução.</p>
@@ -85,17 +98,17 @@
                     <p class="welcome-text">Seja bem-vindo(a)!</p>
                 </div>
                 
-                <div class="stats-grid" data-aos="fade-left">
+                <div class="about-stats">
                     <div class="stat-item">
-                        <div class="stat-number" data-target="100">0</div>
+                        <div class="stat-number">100+</div>
                         <div class="stat-label">Projetos Realizados</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number" data-target="5">0</div>
+                        <div class="stat-number">5+</div>
                         <div class="stat-label">Anos de Experiência</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number" data-target="100">0</div>
+                        <div class="stat-number">100%</div>
                         <div class="stat-label">Satisfação do Cliente</div>
                     </div>
                 </div>
@@ -104,60 +117,72 @@
     </section>
 
     <!-- Services Section -->
-    <section id="servicos" class="services">
+    <section id="services" class="services">
         <div class="container">
-            <div class="section-header" data-aos="fade-up">
+            <div class="section-header">
                 <h2 class="section-title">Nossos Serviços</h2>
                 <div class="section-line"></div>
                 <p class="section-subtitle">Soluções especializadas para cada necessidade</p>
             </div>
-            
             <div class="services-grid">
-                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="service-icon">🏭</div>
-                    <h3>Automação Industrial</h3>
-                    <p>Sistemas automatizados para indústrias, com painéis de controle, SCADA e integração de processos complexos.</p>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3 class="service-title">Automação Industrial</h3>
+                    <p class="service-description">
+                        Sistemas automatizados para indústrias, com painéis de controle, SCADA e integração de processos complexos.
+                    </p>
                     <ul class="service-features">
-                        <li>✓ Painéis de controle industrial</li>
-                        <li>✓ Sistemas SCADA</li>
-                        <li>✓ Controle de processos</li>
-                        <li>✓ Subestações elétricas</li>
+                        <li>Painéis de controle industrial</li>
+                        <li>Sistemas SCADA</li>
+                        <li>Controle de processos</li>
+                        <li>Subestações elétricas</li>
                     </ul>
                 </div>
-                
-                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="service-icon">🏠</div>
-                    <h3>Automação Residencial</h3>
-                    <p>Automação residencial inteligente para conforto, segurança e eficiência energética em sua casa.</p>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3 class="service-title">Automação Residencial</h3>
+                    <p class="service-description">
+                        Automação residencial inteligente para conforto, segurança e eficiência energética em sua casa.
+                    </p>
                     <ul class="service-features">
-                        <li>✓ Sistemas domóticos</li>
-                        <li>✓ Controle de iluminação</li>
-                        <li>✓ Automação de portões</li>
-                        <li>✓ Integração inteligente</li>
+                        <li>Sistemas domóticos</li>
+                        <li>Controle de iluminação</li>
+                        <li>Automação de portões</li>
+                        <li>Integração inteligente</li>
                     </ul>
                 </div>
-                
-                <div class="service-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="service-icon">⚡</div>
-                    <h3>Elétrica Industrial</h3>
-                    <p>Instalações elétricas industriais de alta tensão, quadros de comando e manutenção especializada.</p>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="service-title">Elétrica Industrial</h3>
+                    <p class="service-description">
+                        Instalações elétricas industriais de alta tensão, quadros de comando e manutenção especializada.
+                    </p>
                     <ul class="service-features">
-                        <li>✓ Quadros elétricos industriais</li>
-                        <li>✓ Alta tensão</li>
-                        <li>✓ Manutenção preventiva</li>
-                        <li>✓ Adequação às normas NR-10</li>
+                        <li>Quadros elétricos industriais</li>
+                        <li>Alta tensão</li>
+                        <li>Manutenção preventiva</li>
+                        <li>Adequação às normas NR-10</li>
                     </ul>
                 </div>
-                
-                <div class="service-card" data-aos="fade-up" data-aos-delay="400">
-                    <div class="service-icon">🔌</div>
-                    <h3>Elétrica Residencial</h3>
-                    <p>Instalações elétricas residenciais seguras e eficientes, com quadros de distribuição e adequação às normas.</p>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-plug"></i>
+                    </div>
+                    <h3 class="service-title">Elétrica Residencial</h3>
+                    <p class="service-description">
+                        Instalações elétricas residenciais seguras e eficientes, com quadros de distribuição e adequação às normas.
+                    </p>
                     <ul class="service-features">
-                        <li>✓ Instalações residenciais</li>
-                        <li>✓ Quadros de distribuição</li>
-                        <li>✓ Tomadas e interruptores</li>
-                        <li>✓ Adequação NBR 5410</li>
+                        <li>Instalações residenciais</li>
+                        <li>Quadros de distribuição</li>
+                        <li>Tomadas e interruptores</li>
+                        <li>Adequação NBR 5410</li>
                     </ul>
                 </div>
             </div>
@@ -167,22 +192,20 @@
     <!-- Portfolio Section -->
     <section id="portfolio" class="portfolio">
         <div class="container">
-            <div class="section-header" data-aos="fade-up">
+            <div class="section-header">
                 <h2 class="section-title">Portfólio</h2>
                 <div class="section-line"></div>
                 <p class="section-subtitle">Conheça alguns dos nossos principais projetos</p>
             </div>
-            
-            <div class="portfolio-filters" data-aos="fade-up" data-aos-delay="100">
+            <div class="portfolio-filters">
                 <button class="filter-btn active" data-filter="all">Todos</button>
                 <button class="filter-btn" data-filter="automacao-industrial">Automação Industrial</button>
                 <button class="filter-btn" data-filter="automacao-residencial">Automação Residencial</button>
                 <button class="filter-btn" data-filter="eletrica-industrial">Elétrica Industrial</button>
                 <button class="filter-btn" data-filter="eletrica-residencial">Elétrica Residencial</button>
             </div>
-            
             <div class="portfolio-grid" id="portfolio-grid">
-                <div class="portfolio-item" data-category="automacao-industrial" data-aos="fade-up" data-aos-delay="100">
+                <div class="portfolio-item" data-category="automacao-industrial">
                     <div class="portfolio-image">
                         <img src="assets/images/IMG_0515.jpeg" alt="Painel de Controle Industrial" loading="lazy">
                         <div class="portfolio-overlay">
@@ -195,7 +218,7 @@
                     </div>
                 </div>
                 
-                <div class="portfolio-item" data-category="eletrica-industrial" data-aos="fade-up" data-aos-delay="200">
+                <div class="portfolio-item" data-category="eletrica-industrial">
                     <div class="portfolio-image">
                         <img src="assets/images/IMG_0518.jpeg" alt="Subestação Elétrica" loading="lazy">
                         <div class="portfolio-overlay">
@@ -208,7 +231,7 @@
                     </div>
                 </div>
                 
-                <div class="portfolio-item" data-category="eletrica-industrial" data-aos="fade-up" data-aos-delay="300">
+                <div class="portfolio-item" data-category="eletrica-industrial">
                     <div class="portfolio-image">
                         <img src="assets/images/IMG_0517.jpeg" alt="Painel Elétrico Industrial" loading="lazy">
                         <div class="portfolio-overlay">
@@ -221,7 +244,7 @@
                     </div>
                 </div>
                 
-                <div class="portfolio-item" data-category="eletrica-industrial" data-aos="fade-up" data-aos-delay="400">
+                <div class="portfolio-item" data-category="eletrica-industrial">
                     <div class="portfolio-image">
                         <img src="assets/images/IMG_0519.jpeg" alt="Sala Técnica" loading="lazy">
                         <div class="portfolio-overlay">
@@ -234,7 +257,7 @@
                     </div>
                 </div>
                 
-                <div class="portfolio-item" data-category="eletrica-industrial" data-aos="fade-up" data-aos-delay="500">
+                <div class="portfolio-item" data-category="eletrica-industrial">
                     <div class="portfolio-image">
                         <img src="assets/images/IMG_0522.jpeg" alt="Quadro Elétrico" loading="lazy">
                         <div class="portfolio-overlay">
@@ -247,7 +270,7 @@
                     </div>
                 </div>
                 
-                <div class="portfolio-item" data-category="eletrica-industrial" data-aos="fade-up" data-aos-delay="600">
+                <div class="portfolio-item" data-category="eletrica-industrial">
                     <div class="portfolio-image">
                         <img src="assets/images/IMG_0520.jpeg" alt="Equipamentos Alta Tensão" loading="lazy">
                         <div class="portfolio-overlay">
@@ -266,14 +289,13 @@
     <!-- Videos Section -->
     <section id="videos" class="videos">
         <div class="container">
-            <div class="section-header" data-aos="fade-up">
+            <div class="section-header">
                 <h2 class="section-title">Vídeos dos Projetos</h2>
                 <div class="section-line"></div>
                 <p class="section-subtitle">Veja nossos projetos em ação</p>
             </div>
-            
-            <div class="videos-grid">
-                <div class="video-item" data-aos="fade-up" data-aos-delay="100">
+            <div class="videos-grid" id="videos-grid">
+                <div class="video-item">
                     <div class="video-container">
                         <video controls preload="metadata">
                             <source src="assets/images/IMG_0651.mov" type="video/mp4">
@@ -287,7 +309,7 @@
                     </div>
                 </div>
                 
-                <div class="video-item" data-aos="fade-up" data-aos-delay="200">
+                <div class="video-item">
                     <div class="video-container">
                         <video controls preload="metadata">
                             <source src="assets/images/IMG_0668.mov" type="video/mp4">
@@ -301,7 +323,7 @@
                     </div>
                 </div>
                 
-                <div class="video-item" data-aos="fade-up" data-aos-delay="300">
+                <div class="video-item">
                     <div class="video-container">
                         <video controls preload="metadata">
                             <source src="assets/images/IMG_0650.mov" type="video/mp4">
@@ -315,7 +337,7 @@
                     </div>
                 </div>
                 
-                <div class="video-item" data-aos="fade-up" data-aos-delay="400">
+                <div class="video-item">
                     <div class="video-container">
                         <video controls preload="metadata">
                             <source src="assets/images/IMG_1267.mov" type="video/mp4">
@@ -329,7 +351,7 @@
                     </div>
                 </div>
                 
-                <div class="video-item" data-aos="fade-up" data-aos-delay="500">
+                <div class="video-item">
                     <div class="video-container">
                         <video controls preload="metadata">
                             <source src="assets/images/IMG_1270.mov" type="video/mp4">
@@ -343,7 +365,7 @@
                     </div>
                 </div>
                 
-                <div class="video-item" data-aos="fade-up" data-aos-delay="600">
+                <div class="video-item">
                     <div class="video-container">
                         <video controls preload="metadata">
                             <source src="assets/images/AA2E4C6F-6FB2-4F2B-8D46-3CB1125347F7.mp4" type="video/mp4">
@@ -356,7 +378,7 @@
                     </div>
                 </div>
                 
-                <div class="video-item" data-aos="fade-up" data-aos-delay="700">
+                <div class="video-item">
                     <div class="video-container">
                         <video controls preload="metadata">
                             <source src="assets/images/IMG_1331.mov" type="video/mp4">
@@ -374,29 +396,59 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contato" class="contact">
+    <section id="contact" class="contact">
         <div class="container">
-            <div class="section-header" data-aos="fade-up">
+            <div class="section-header">
                 <h2 class="section-title">Entre em Contato</h2>
                 <div class="section-line"></div>
                 <p class="section-subtitle">Vamos conversar sobre seu próximo projeto</p>
             </div>
-            
-            <div class="contact-grid">
-                <div class="contact-item" data-aos="fade-up" data-aos-delay="100">
-                    <div class="contact-icon">📞</div>
-                    <h4>Telefone</h4>
-                    <p>Em breve</p>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Telefone</h4>
+                            <p>Em breve</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>E-mail</h4>
+                            <p>Em breve</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Localização</h4>
+                            <p>Em breve</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="contact-item" data-aos="fade-up" data-aos-delay="200">
-                    <div class="contact-icon">✉️</div>
-                    <h4>E-mail</h4>
-                    <p>Em breve</p>
-                </div>
-                <div class="contact-item" data-aos="fade-up" data-aos-delay="300">
-                    <div class="contact-icon">📍</div>
-                    <h4>Localização</h4>
-                    <p>Em breve</p>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" placeholder="Seu Nome" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="Seu E-mail" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" id="phone" name="phone" placeholder="Seu Telefone">
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" name="message" placeholder="Sua Mensagem" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -406,28 +458,40 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="assets/images/logo.jpg" alt="A.S Prestador" class="logo">
+                    <p>Entregando excelência em automação, elétrica e climatização</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#about">Sobre</a></li>
+                        <li><a href="#services">Serviços</a></li>
+                        <li><a href="#portfolio">Portfólio</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contato</h4>
+                    <p>Informações de contato serão atualizadas em breve</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
                 <p>&copy; 2024 A.S Prestador. Todos os direitos reservados.</p>
-                <p>Desenvolvido com dedicação e excelência.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Modal -->
-    <div id="modal" class="modal">
+    <!-- Project Modal -->
+    <div id="projectModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <div id="modal-body"></div>
+            <span class="close">&times;</span>
+            <div id="modalContent">
+                <!-- Modal content will be dynamically loaded -->
+            </div>
         </div>
     </div>
 
-    <!-- Loading Screen -->
-    <div id="loading" class="loading-screen">
-        <div class="loading-spinner"></div>
-        <p>Carregando...</p>
-    </div>
-
-    <!-- Scripts -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="assets/js/script.js"></script>
 </body>
 </html>
