@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Site Portfólio A.S Prestador
 
 Site profissional desenvolvido para a A.S Prestador, empresa especializada em Automação, Instalações Elétricas e Climatização.
@@ -143,3 +144,7 @@ Este projeto foi desenvolvido especificamente para A.S Prestador.
 **Desenvolvido com ❤️ para A.S Prestador**
 *Entregando Excelência em Automação, Elétrica e Climatização*
 
+=======
+# portfolio
+Portifólio do meu trabalho
+>>>>>>> a9ce510188ee2a3a7bb051cd7bff0ef0463b8b3c
