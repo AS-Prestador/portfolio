@@ -1,38 +1,50 @@
 // DOM Elements
-const hamburger = document.querySelector('.hamburger');
-const navMenu = document.querySelector('.nav-menu');
-const navLinks = document.querySelectorAll('.nav-link');
-const portfolioFilters = document.querySelectorAll('.filter-btn');
-const portfolioItems = document.querySelectorAll('.portfolio-item');
-const modal = document.getElementById('projectModal');
-const modalContent = document.getElementById('modalContent');
-const closeModal = document.querySelector('.close');
-const contactForm = document.getElementById('contactForm');
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('nav-menu');
+const header = document.getElementById('header');
+const loading = document.getElementById('loading');
 
-// Mobile Navigation
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
+// Loading Screen
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        loading.style.opacity = '0';
+        setTimeout(() => {
+            loading.style.display = 'none';
+        }, 500);
+    }, 1000);
+});
+
+// Mobile Menu Toggle
+hamburger?.addEventListener('click', () => {
     navMenu.classList.toggle('active');
+    hamburger.classList.toggle('active');
 });
 
 // Close mobile menu when clicking on a link
-navLinks.forEach(link => {
+document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
         navMenu.classList.remove('active');
+        hamburger.classList.remove('active');
     });
 });
 
-// Smooth scrolling for navigation links
-navLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
+// Header Scroll Effect
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 100) {
+        header.style.background = 'rgba(0, 0, 0, 0.98)';
+    } else {
+        header.style.background = 'rgba(0, 0, 0, 0.95)';
+    }
+});
+
+// Smooth Scrolling for Navigation Links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        const targetId = link.getAttribute('href');
-        const targetSection = document.querySelector(targetId);
-        
-        if (targetSection) {
-            const headerHeight = document.querySelector('.header').offsetHeight;
-            const targetPosition = targetSection.offsetTop - headerHeight;
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            const headerHeight = header.offsetHeight;
+            const targetPosition = target.offsetTop - headerHeight;
             
             window.scrollTo({
                 top: targetPosition,
@@ -42,20 +54,23 @@ navLinks.forEach(link => {
     });
 });
 
-// Portfolio Filtering
-portfolioFilters.forEach(filter => {
-    filter.addEventListener('click', () => {
-        // Remove active class from all filters
-        portfolioFilters.forEach(f => f.classList.remove('active'));
-        // Add active class to clicked filter
-        filter.classList.add('active');
+// Portfolio Filter Functionality
+const filterButtons = document.querySelectorAll('.filter-btn');
+const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        // Remove active class from all buttons
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        // Add active class to clicked button
+        button.classList.add('active');
         
-        const filterValue = filter.getAttribute('data-filter');
+        const filterValue = button.getAttribute('data-filter');
         
         portfolioItems.forEach(item => {
             if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
                 item.style.display = 'block';
-                item.style.animation = 'fadeInUp 0.6s ease-out';
+                item.style.animation = 'fadeInUp 0.6s ease forwards';
             } else {
                 item.style.display = 'none';
             }
@@ -63,263 +78,324 @@ portfolioFilters.forEach(filter => {
     });
 });
 
-// Modal functionality
+// Counter Animation for Stats
+function animateCounters() {
+    const counters = document.querySelectorAll('.stat-number');
+    
+    counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-target'));
+        const increment = target / 100;
+        let current = 0;
+        
+        const updateCounter = () => {
+            if (current < target) {
+                current += increment;
+                counter.textContent = Math.ceil(current);
+                setTimeout(updateCounter, 20);
+            } else {
+                counter.textContent = target;
+            }
+        };
+        
+        updateCounter();
+    });
+}
+
+// Intersection Observer for Counter Animation
+const statsSection = document.querySelector('.stats-grid');
+if (statsSection) {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCounters();
+                observer.unobserve(entry.target);
+            }
+        });
+    });
+    
+    observer.observe(statsSection);
+}
+
+// Modal Functionality
+const modal = document.getElementById('modal');
+const modalBody = document.getElementById('modal-body');
+
+// Project Data
+const projects = {
+    project1: {
+        title: 'Painel de Controle Industrial',
+        image: 'assets/images/IMG_0515.jpeg',
+        description: 'Sistema avançado de automação industrial com interface HMI (Human Machine Interface) para controle e monitoramento de processos industriais. O painel conta com display colorido, botões de comando e indicadores luminosos para operação segura e eficiente.',
+        features: [
+            'Interface HMI com display colorido',
+            'Botões de emergência e controle',
+            'Indicadores luminosos de status',
+            'Sistema de monitoramento em tempo real',
+            'Conformidade com normas de segurança'
+        ],
+        category: 'Automação Industrial'
+    },
+    project2: {
+        title: 'Subestação Elétrica',
+        image: 'assets/images/IMG_0518.jpeg',
+        description: 'Instalação completa de subestação elétrica com equipamentos de alta tensão, sistemas de proteção e sinalização de segurança. Projeto executado seguindo rigorosamente as normas técnicas e de segurança.',
+        features: [
+            'Equipamentos de alta tensão',
+            'Sistemas de proteção avançados',
+            'Sinalização de segurança',
+            'Aterramento e proteção',
+            'Conformidade com NR-10'
+        ],
+        category: 'Elétrica Industrial'
+    },
+    project3: {
+        title: 'Painel Elétrico Industrial',
+        image: 'assets/images/IMG_0517.jpeg',
+        description: 'Painel elétrico industrial com sistema de controle e comando, incluindo chaves de operação, indicadores e dispositivos de proteção. Instalação com foco na segurança operacional.',
+        features: [
+            'Chaves de controle e comando',
+            'Dispositivos de proteção',
+            'Indicadores de status',
+            'Sistema de intertravamento',
+            'Manutenção facilitada'
+        ],
+        category: 'Elétrica Industrial'
+    },
+    project4: {
+        title: 'Sala Técnica Industrial',
+        image: 'assets/images/IMG_0519.jpeg',
+        description: 'Instalação completa de sala técnica com equipamentos elétricos especializados, incluindo inversores, controladores e sistemas de automação para ambiente industrial.',
+        features: [
+            'Equipamentos especializados',
+            'Sistemas de automação',
+            'Controle de temperatura',
+            'Organização de cabos',
+            'Acesso controlado'
+        ],
+        category: 'Elétrica Industrial'
+    },
+    project5: {
+        title: 'Quadro Elétrico Industrial',
+        image: 'assets/images/IMG_0522.jpeg',
+        description: 'Quadro elétrico industrial completo com disjuntores, dispositivos de proteção e sistema de distribuição elétrica. Instalação organizada e segura para ambiente industrial.',
+        features: [
+            'Disjuntores de proteção',
+            'Sistema de distribuição',
+            'Organização de circuitos',
+            'Identificação clara',
+            'Fácil manutenção'
+        ],
+        category: 'Elétrica Industrial'
+    },
+    project6: {
+        title: 'Equipamentos de Alta Tensão',
+        image: 'assets/images/IMG_0520.jpeg',
+        description: 'Instalação de equipamentos de alta tensão com todos os sistemas de segurança necessários, incluindo sinalização, proteções e acesso controlado conforme normas técnicas.',
+        features: [
+            'Equipamentos de alta tensão',
+            'Sinalização de segurança',
+            'Proteções adequadas',
+            'Acesso controlado',
+            'Conformidade normativa'
+        ],
+        category: 'Elétrica Industrial'
+    }
+};
+
 function openModal(projectId) {
-    const projectData = getProjectData(projectId);
-    modalContent.innerHTML = createModalContent(projectData);
+    const project = projects[projectId];
+    if (!project) return;
+    
+    modalBody.innerHTML = `
+        <div class="modal-project">
+            <img src="${project.image}" alt="${project.title}" style="width: 100%; max-height: 300px; object-fit: cover; border-radius: 10px; margin-bottom: 20px;">
+            <h2 style="color: #d4af37; margin-bottom: 10px;">${project.title}</h2>
+            <p style="color: #666; margin-bottom: 10px;"><strong>Categoria:</strong> ${project.category}</p>
+            <p style="line-height: 1.6; margin-bottom: 20px;">${project.description}</p>
+            <h3 style="color: #333; margin-bottom: 15px;">Características do Projeto:</h3>
+            <ul style="list-style: none; padding: 0;">
+                ${project.features.map(feature => `
+                    <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
+                        <span style="position: absolute; left: 0; color: #d4af37; font-weight: bold;">✓</span>
+                        ${feature}
+                    </li>
+                `).join('')}
+            </ul>
+        </div>
+    `;
+    
     modal.style.display = 'block';
     document.body.style.overflow = 'hidden';
 }
 
-function closeModalFunc() {
+function closeModal() {
     modal.style.display = 'none';
     document.body.style.overflow = 'auto';
 }
 
-closeModal.addEventListener('click', closeModalFunc);
-
+// Close modal when clicking outside
 window.addEventListener('click', (e) => {
     if (e.target === modal) {
-        closeModalFunc();
+        closeModal();
     }
 });
 
-// Project data (can be expanded with real project information)
-function getProjectData(projectId) {
-    const projects = {
-        project1: {
-            title: 'Sistema de Automação Industrial',
-            description: 'Implementação completa de sistema automatizado para indústria alimentícia, incluindo controle de processos, monitoramento em tempo real e integração com sistemas existentes.',
-            technologies: ['PLC Siemens', 'SCADA', 'HMI', 'Sensores Industriais'],
-            duration: '3 meses',
-            client: 'Indústria Alimentícia XYZ',
-            images: ['assets/images/automacao-industrial.jpg'],
-            challenges: 'Integração com sistemas legados e minimização do tempo de parada da produção.',
-            results: 'Aumento de 35% na eficiência produtiva e redução de 50% nos erros operacionais.'
-        },
-        project2: {
-            title: 'Instalação Elétrica Comercial',
-            description: 'Projeto completo de instalação elétrica para complexo comercial de 5.000m², incluindo sistema de iluminação LED, quadros de distribuição e sistema de emergência.',
-            technologies: ['Quadros Elétricos', 'Iluminação LED', 'Sistema de Emergência', 'Automação Predial'],
-            duration: '2 meses',
-            client: 'Shopping Center ABC',
-            images: ['assets/images/instalacoes-eletricas.jpg'],
-            challenges: 'Adequação às normas de segurança e eficiência energética.',
-            results: 'Redução de 40% no consumo energético e certificação de segurança aprovada.'
-        },
-        project3: {
-            title: 'Sistema de Climatização HVAC',
-            description: 'Instalação de sistema HVAC completo para edifício corporativo, incluindo controle de temperatura, umidade e qualidade do ar em todos os ambientes.',
-            technologies: ['Sistema HVAC', 'Controle Automático', 'Sensores de Qualidade do Ar', 'Eficiência Energética'],
-            duration: '4 meses',
-            client: 'Edifício Corporativo DEF',
-            images: ['assets/images/climatizacao.webp'],
-            challenges: 'Balanceamento térmico e controle de umidade em diferentes zonas.',
-            results: 'Melhoria de 60% na qualidade do ar e redução de 30% nos custos operacionais.'
-        }
-    };
-    
-    return projects[projectId] || {};
-}
-
-function createModalContent(project) {
-    return `
-        <h2>${project.title}</h2>
-        <div class="project-details">
-            <div class="project-image">
-                <img src="${project.images[0]}" alt="${project.title}" style="width: 100%; border-radius: 8px; margin-bottom: 2rem;">
-            </div>
-            <div class="project-info">
-                <p><strong>Descrição:</strong> ${project.description}</p>
-                <p><strong>Cliente:</strong> ${project.client}</p>
-                <p><strong>Duração:</strong> ${project.duration}</p>
-                <p><strong>Desafios:</strong> ${project.challenges}</p>
-                <p><strong>Resultados:</strong> ${project.results}</p>
-                <div class="technologies">
-                    <strong>Tecnologias Utilizadas:</strong>
-                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem;">
-                        ${project.technologies.map(tech => `<span style="background: var(--primary-color); color: white; padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.9rem;">${tech}</span>`).join('')}
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
-}
-
-// Contact Form
-contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    const formData = new FormData(contactForm);
-    const name = formData.get('name');
-    const email = formData.get('email');
-    const phone = formData.get('phone');
-    const message = formData.get('message');
-    
-    // Here you would typically send the data to a server
-    // For now, we'll just show an alert
-    alert(`Obrigado, ${name}! Sua mensagem foi enviada com sucesso. Entraremos em contato em breve.`);
-    
-    // Reset form
-    contactForm.reset();
+// Close modal with Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.style.display === 'block') {
+        closeModal();
+    }
 });
 
-// Scroll animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('fade-in-up');
-        }
+// Initialize AOS (Animate On Scroll)
+if (typeof AOS !== 'undefined') {
+    AOS.init({
+        duration: 800,
+        easing: 'ease-in-out',
+        once: true,
+        mirror: false
     });
-}, observerOptions);
+}
 
-// Observe elements for animation
-document.addEventListener('DOMContentLoaded', () => {
-    const animateElements = document.querySelectorAll('.service-card, .portfolio-item, .stat-item, .contact-item');
-    animateElements.forEach(el => observer.observe(el));
+// Lazy Loading for Images
+if ('IntersectionObserver' in window) {
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.classList.remove('lazy');
+                imageObserver.unobserve(img);
+            }
+        });
+    });
+
+    document.querySelectorAll('img[data-src]').forEach(img => {
+        imageObserver.observe(img);
+    });
+}
+
+// Video Lazy Loading
+const videos = document.querySelectorAll('video');
+videos.forEach(video => {
+    video.addEventListener('loadstart', () => {
+        video.style.opacity = '1';
+    });
 });
 
-// Header scroll effect
+// Form Validation (if contact form exists)
+const contactForm = document.getElementById('contact-form');
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        const formData = new FormData(contactForm);
+        const name = formData.get('name');
+        const email = formData.get('email');
+        const message = formData.get('message');
+        
+        if (!name || !email || !message) {
+            alert('Por favor, preencha todos os campos.');
+            return;
+        }
+        
+        if (!isValidEmail(email)) {
+            alert('Por favor, insira um e-mail válido.');
+            return;
+        }
+        
+        // Here you would typically send the form data to a server
+        alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+        contactForm.reset();
+    });
+}
+
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+// Scroll to Top Button
+const scrollTopBtn = document.createElement('button');
+scrollTopBtn.innerHTML = '↑';
+scrollTopBtn.className = 'scroll-top-btn';
+scrollTopBtn.style.cssText = `
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: #d4af37;
+    color: #000;
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000;
+`;
+
+document.body.appendChild(scrollTopBtn);
+
 window.addEventListener('scroll', () => {
-    const header = document.querySelector('.header');
-    if (window.scrollY > 100) {
-        header.style.background = 'rgba(26, 26, 26, 0.98)';
+    if (window.scrollY > 500) {
+        scrollTopBtn.style.opacity = '1';
+        scrollTopBtn.style.visibility = 'visible';
     } else {
-        header.style.background = 'rgba(26, 26, 26, 0.95)';
+        scrollTopBtn.style.opacity = '0';
+        scrollTopBtn.style.visibility = 'hidden';
     }
 });
 
-// Active navigation link highlighting
-window.addEventListener('scroll', () => {
-    const sections = document.querySelectorAll('section[id]');
-    const scrollPos = window.scrollY + 100;
-    
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.offsetHeight;
-        const sectionId = section.getAttribute('id');
-        
-        if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${sectionId}`) {
-                    link.classList.add('active');
-                }
-            });
-        }
+scrollTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
     });
 });
 
-// Function to add video to the videos section
-function addVideo(videoSrc, title, description) {
-    const videosGrid = document.getElementById('videos-grid');
-    const placeholder = videosGrid.querySelector('.video-placeholder');
-    
-    // Remove placeholder if it exists
-    if (placeholder) {
-        placeholder.remove();
-    }
-    
-    const videoItem = document.createElement('div');
-    videoItem.className = 'video-item';
-    videoItem.innerHTML = `
-        <video controls>
-            <source src="${videoSrc}" type="video/mp4">
-            Seu navegador não suporta o elemento de vídeo.
-        </video>
-        <div class="video-info" style="padding: 1rem; background: white;">
-            <h4>${title}</h4>
-            <p>${description}</p>
-        </div>
-    `;
-    
-    videosGrid.appendChild(videoItem);
-}
-
-// Function to add image to portfolio
-function addPortfolioImage(imageSrc, title, description, category) {
-    const portfolioGrid = document.getElementById('portfolio-grid');
-    
-    const portfolioItem = document.createElement('div');
-    portfolioItem.className = 'portfolio-item';
-    portfolioItem.setAttribute('data-category', category);
-    portfolioItem.innerHTML = `
-        <div class="portfolio-image">
-            <img src="${imageSrc}" alt="${title}">
-            <div class="portfolio-overlay">
-                <div class="portfolio-info">
-                    <h4>${title}</h4>
-                    <p>${description}</p>
-                    <button class="view-project" onclick="openCustomModal('${title}', '${description}', '${imageSrc}')">Ver Detalhes</button>
-                </div>
-            </div>
-        </div>
-    `;
-    
-    portfolioGrid.appendChild(portfolioItem);
-}
-
-// Function to open custom modal for user-added content
-function openCustomModal(title, description, imageSrc) {
-    const customContent = `
-        <h2>${title}</h2>
-        <div class="project-details">
-            <div class="project-image">
-                <img src="${imageSrc}" alt="${title}" style="width: 100%; border-radius: 8px; margin-bottom: 2rem;">
-            </div>
-            <div class="project-info">
-                <p>${description}</p>
-            </div>
-        </div>
-    `;
-    
-    modalContent.innerHTML = customContent;
-    modal.style.display = 'block';
-    document.body.style.overflow = 'hidden';
-}
-
-// Utility function to update contact information
-function updateContactInfo(phone, email, address) {
-    const contactItems = document.querySelectorAll('.contact-item');
-    
-    contactItems.forEach(item => {
-        const icon = item.querySelector('i');
-        const details = item.querySelector('.contact-details p');
-        
-        if (icon.classList.contains('fa-phone') && phone) {
-            details.textContent = phone;
-        } else if (icon.classList.contains('fa-envelope') && email) {
-            details.textContent = email;
-        } else if (icon.classList.contains('fa-map-marker-alt') && address) {
-            details.textContent = address;
-        }
-    });
-    
-    // Update footer contact info
-    const footerContact = document.querySelector('.footer-contact p');
-    if (phone || email || address) {
-        let contactText = '';
-        if (phone) contactText += `Tel: ${phone} `;
-        if (email) contactText += `Email: ${email} `;
-        if (address) contactText += `Endereço: ${address}`;
-        footerContact.textContent = contactText;
-    }
-}
-
-// Initialize page
+// Performance Optimization
 document.addEventListener('DOMContentLoaded', () => {
-    // Add any initialization code here
-    console.log('A.S Prestador Portfolio loaded successfully!');
+    // Preload critical images
+    const criticalImages = [
+        'assets/images/logo.jpg'
+    ];
+    
+    criticalImages.forEach(src => {
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'image';
+        link.href = src;
+        document.head.appendChild(link);
+    });
 });
 
-// Export functions for external use (if needed)
-window.addVideo = addVideo;
-window.addPortfolioImage = addPortfolioImage;
-window.updateContactInfo = updateContactInfo;
+// Error Handling for Videos
+document.querySelectorAll('video').forEach(video => {
+    video.addEventListener('error', (e) => {
+        console.warn('Erro ao carregar vídeo:', e.target.src);
+        const container = e.target.parentElement;
+        if (container) {
+            container.innerHTML = `
+                <div style="display: flex; align-items: center; justify-content: center; height: 250px; background: #f0f0f0; color: #666;">
+                    <p>Vídeo não disponível</p>
+                </div>
+            `;
+        }
+    });
+});
+
+// Console Welcome Message
+console.log(`
+🎉 Site A.S Prestador carregado com sucesso!
+⚡ Desenvolvido com tecnologias modernas
+🔧 Automação | Elétrica | Climatização
+`);
+
+// Export functions for global access
 window.openModal = openModal;
+window.closeModal = closeModal;
 
