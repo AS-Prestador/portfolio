@@ -207,104 +207,101 @@ body {
     color: var(--white);
 }
 
-/* Floating Cards - Atualizado para 8 cards */
+/* Floating Cards - Melhor espaçamento para 8 cards */
 .floating-cards {
     position: relative;
-    height: 500px;
+    height: 550px;
     width: 100%;
 }
 
 .card {
     position: absolute;
     background: var(--white);
-    padding: 1.5rem;
+    padding: 1.2rem;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.8rem;
+    gap: 0.7rem;
     transition: var(--transition);
     animation: float 8s ease-in-out infinite;
-    min-width: 140px;
-    max-width: 160px;
+    min-width: 130px;
+    max-width: 150px;
+    z-index: 10;
 }
 
 .card:hover {
-    transform: translateY(-5px) scale(1.05);
+    transform: translateY(-8px) scale(1.05);
     box-shadow: var(--shadow-hover);
+    z-index: 20;
 }
 
 .card i {
-    font-size: 2rem;
+    font-size: 1.8rem;
     color: var(--primary-color);
 }
 
 .card span {
     font-weight: 600;
     color: var(--text-primary);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     text-align: center;
     line-height: 1.2;
 }
 
-/* Posicionamento dos 8 cards em formato circular/oval */
+/* Posicionamento otimizado dos 8 cards - Evitando sobreposições */
 .card-1 {
-    top: 0;
-    left: 25%;
+    top: 5%;
+    left: 30%;
     animation-delay: 0s;
 }
 
 .card-2 {
-    top: 15%;
-    right: 0;
+    top: 8%;
+    right: 8%;
     animation-delay: 1s;
 }
 
 .card-3 {
-    top: 45%;
-    right: 5%;
+    top: 35%;
+    right: 2%;
     animation-delay: 2s;
 }
 
 .card-4 {
-    bottom: 15%;
-    right: 0;
+    bottom: 25%;
+    right: 12%;
     animation-delay: 3s;
 }
 
 .card-5 {
-    bottom: 0;
-    left: 25%;
+    bottom: 5%;
+    left: 30%;
     animation-delay: 4s;
 }
 
 .card-6 {
-    bottom: 15%;
-    left: 0;
+    bottom: 25%;
+    left: 2%;
     animation-delay: 5s;
 }
 
 .card-7 {
-    top: 45%;
-    left: 5%;
+    top: 35%;
+    left: 8%;
     animation-delay: 6s;
 }
 
 .card-8 {
-    top: 15%;
-    left: 0;
+    top: 8%;
+    left: 8%;
     animation-delay: 7s;
 }
 
 @keyframes float {
     0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-15px); }
-}
-
-/* Animação especial para cards pares e ímpares */
-.card-2:hover, .card-4:hover, .card-6:hover, .card-8:hover {
-    animation-direction: reverse;
+    50% { transform: translateY(-12px); }
 }
 
 /* Section Styles */
@@ -401,13 +398,13 @@ body {
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
 }
 
 .service-card {
     background: var(--white);
-    padding: 2.5rem 2rem;
+    padding: 2.2rem 1.8rem;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
     text-align: center;
@@ -421,33 +418,33 @@ body {
 }
 
 .service-icon {
-    width: 70px;
-    height: 70px;
+    width: 65px;
+    height: 65px;
     background: var(--gradient);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 1.5rem;
+    margin: 0 auto 1.3rem;
 }
 
 .service-icon i {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     color: var(--white);
 }
 
 .service-title {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 600;
     color: var(--text-primary);
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
 }
 
 .service-description {
     color: var(--text-secondary);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.3rem;
     line-height: 1.6;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
 }
 
 .service-features {
@@ -456,11 +453,11 @@ body {
 }
 
 .service-features li {
-    padding: 0.4rem 0;
+    padding: 0.35rem 0;
     color: var(--text-secondary);
     position: relative;
     padding-left: 1.5rem;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 }
 
 .service-features li::before {
@@ -819,6 +816,23 @@ body {
 }
 
 /* Responsive Design */
+@media (max-width: 1024px) {
+    /* Tablet adjustments */
+    .floating-cards {
+        height: 480px;
+    }
+    
+    .card {
+        min-width: 115px;
+        max-width: 135px;
+        padding: 1rem;
+    }
+    
+    .card span {
+        font-size: 0.8rem;
+    }
+}
+
 @media (max-width: 768px) {
     .hamburger {
         display: flex;
@@ -854,34 +868,45 @@ body {
         font-size: 2.5rem;
     }
 
-    /* Cards responsivos para mobile */
+    /* Cards responsivos para mobile - Layout em grid */
     .floating-cards {
-        height: 400px;
+        height: 420px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 1rem;
+        padding: 1rem;
     }
 
     .card {
-        padding: 1rem;
-        min-width: 100px;
-        max-width: 120px;
+        position: static;
+        min-width: auto;
+        max-width: none;
+        padding: 0.8rem;
+        animation: none;
+    }
+
+    .card:hover {
+        transform: translateY(-3px) scale(1.02);
     }
 
     .card span {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
     }
 
     .card i {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
     }
 
-    /* Reposicionamento dos cards para mobile */
-    .card-1 { top: 0; left: 20%; }
-    .card-2 { top: 10%; right: 0; }
-    .card-3 { top: 35%; right: 10%; }
-    .card-4 { bottom: 10%; right: 0; }
-    .card-5 { bottom: 0; left: 20%; }
-    .card-6 { bottom: 10%; left: 0; }
-    .card-7 { top: 35%; left: 10%; }
-    .card-8 { top: 10%; left: 0; }
+    /* Resetar posicionamento absoluto para mobile */
+    .card-1, .card-2, .card-3, .card-4,
+    .card-5, .card-6, .card-7, .card-8 {
+        top: auto;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        transform: none;
+    }
 
     .about-content {
         grid-template-columns: 1fr;
@@ -963,21 +988,24 @@ body {
 
     /* Cards ainda menores para telas muito pequenas */
     .floating-cards {
-        height: 350px;
+        height: 380px;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+        gap: 0.8rem;
+        padding: 0.8rem;
     }
 
     .card {
-        padding: 0.8rem;
-        min-width: 80px;
-        max-width: 100px;
+        padding: 0.6rem;
     }
 
     .card span {
         font-size: 0.7rem;
+        line-height: 1.1;
     }
 
     .card i {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
     }
 }
 
