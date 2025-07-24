@@ -3,11 +3,20 @@ const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 const navLinks = document.querySelectorAll('.nav-link');
 const portfolioFilters = document.querySelectorAll('.filter-btn');
-const portfolioItems = document.querySelectorAll('.portfolio-item');
+const portfolioItems = document.querySelectorAll('.portfolio-slide');
 const modal = document.getElementById('projectModal');
 const modalContent = document.getElementById('modalContent');
 const closeModal = document.querySelector('.close');
 const contactForm = document.getElementById('contactForm');
+
+// Portfolio Carousel Elements
+const carousel = document.getElementById('portfolio-carousel');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const indicators = document.querySelectorAll('.indicator');
+let currentSlide = 0;
+const totalSlides = portfolioItems.length;
+let slidesToShow = 3; // Número de slides visíveis por vez
 
 // Mobile Navigation
 hamburger.addEventListener('click', () => {
@@ -42,7 +51,73 @@ navLinks.forEach(link => {
     });
 });
 
-// Portfolio Filtering
+// Portfolio Carousel Functionality
+function updateCarousel() {
+    const slideWidth = 100 / slidesToShow;
+    const translateX = -(currentSlide * slideWidth);
+    carousel.style.transform = `translateX(${translateX}%)`;
+    
+    // Update indicators
+    indicators.forEach((indicator, index) => {
+        indicator.classList.toggle('active', index === currentSlide);
+    });
+    
+    // Update button states
+    prevBtn.style.opacity = currentSlide === 0 ? '0.5' : '1';
+    nextBtn.style.opacity = currentSlide >= totalSlides - slidesToShow ? '0.5' : '1';
+}
+
+function nextSlide() {
+    if (currentSlide < totalSlides - slidesToShow) {
+        currentSlide++;
+        updateCarousel();
+    }
+}
+
+function prevSlide() {
+    if (currentSlide > 0) {
+        currentSlide--;
+        updateCarousel();
+    }
+}
+
+function goToSlide(slideIndex) {
+    if (slideIndex >= 0 && slideIndex <= totalSlides - slidesToShow) {
+        currentSlide = slideIndex;
+        updateCarousel();
+    }
+}
+
+// Event listeners for carousel
+prevBtn.addEventListener('click', prevSlide);
+nextBtn.addEventListener('click', nextSlide);
+
+indicators.forEach((indicator, index) => {
+    indicator.addEventListener('click', () => goToSlide(index));
+});
+
+// Auto-play carousel (opcional)
+let autoPlayInterval;
+function startAutoPlay() {
+    autoPlayInterval = setInterval(() => {
+        if (currentSlide >= totalSlides - slidesToShow) {
+            currentSlide = 0;
+        } else {
+            currentSlide++;
+        }
+        updateCarousel();
+    }, 5000); // Muda slide a cada 5 segundos
+}
+
+function stopAutoPlay() {
+    clearInterval(autoPlayInterval);
+}
+
+// Pause auto-play on hover
+carousel.addEventListener('mouseenter', stopAutoPlay);
+carousel.addEventListener('mouseleave', startAutoPlay);
+
+// Portfolio Filtering (adaptado para carrossel)
 portfolioFilters.forEach(filter => {
     filter.addEventListener('click', () => {
         // Remove active class from all filters
@@ -60,7 +135,33 @@ portfolioFilters.forEach(filter => {
                 item.style.display = 'none';
             }
         });
+        
+        // Reset carousel position after filtering
+        currentSlide = 0;
+        updateCarousel();
     });
+});
+
+// Initialize carousel
+document.addEventListener('DOMContentLoaded', () => {
+    updateCarousel();
+    startAutoPlay();
+    
+    // Responsive carousel
+    function updateSlidesToShow() {
+        const width = window.innerWidth;
+        if (width <= 480) {
+            slidesToShow = 1;
+        } else if (width <= 768) {
+            slidesToShow = 2;
+        } else {
+            slidesToShow = 3;
+        }
+        updateCarousel();
+    }
+    
+    window.addEventListener('resize', updateSlidesToShow);
+    updateSlidesToShow();
 });
 
 // Modal functionality

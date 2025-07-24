@@ -29,9 +29,7 @@
                     <li class="nav-item">
                         <a href="#portfolio" class="nav-link">Portfólio</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="#videos" class="nav-link">Vídeos</a>
-                    </li>
+
                     <li class="nav-item">
                         <a href="#contact" class="nav-link">Contato</a>
                     </li>
@@ -284,196 +282,109 @@
                 <button class="filter-btn" data-filter="eletrica-industrial">Elétrica Industrial</button>
                 <button class="filter-btn" data-filter="eletrica-residencial">Elétrica Residencial</button>
             </div>
-            <div class="portfolio-grid" id="portfolio-grid">
-                <div class="portfolio-item" data-category="automacao-industrial">
-                    <div class="portfolio-image">
-                        <img src="assets/images/IMG_0515.jpeg" alt="Painel de Controle Industrial" loading="lazy">
-                        <div class="portfolio-overlay">
-                            <div class="portfolio-info">
-                                <h4>Painel de Controle Industrial</h4>
-                                <p>Sistema de automação com interface HMI</p>
-                                <button class="view-project" onclick="openModal('project1')">Ver Detalhes</button>
+            <div class="portfolio-carousel-container">
+                <div class="portfolio-carousel" id="portfolio-carousel">
+                    <div class="portfolio-slide" data-category="automacao-industrial">
+                        <div class="portfolio-image">
+                            <img src="assets/images/IMG_0515.jpeg" alt="Painel de Controle Industrial" loading="lazy">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-info">
+                                    <h4>Painel de Controle Industrial</h4>
+                                    <p>Sistema de automação com interface HMI</p>
+                                    <button class="view-project" onclick="openModal('project1')">Ver Detalhes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="portfolio-slide" data-category="eletrica-industrial">
+                        <div class="portfolio-image">
+                            <img src="assets/images/IMG_0518.jpeg" alt="Subestação Elétrica" loading="lazy">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-info">
+                                    <h4>Subestação Elétrica</h4>
+                                    <p>Instalação de alta tensão com segurança</p>
+                                    <button class="view-project" onclick="openModal('project2')">Ver Detalhes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="portfolio-slide" data-category="eletrica-industrial">
+                        <div class="portfolio-image">
+                            <img src="assets/images/IMG_0517.jpeg" alt="Painel Elétrico Industrial" loading="lazy">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-info">
+                                    <h4>Painel Elétrico Industrial</h4>
+                                    <p>Controle e comando industrial</p>
+                                    <button class="view-project" onclick="openModal('project3')">Ver Detalhes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="portfolio-slide" data-category="eletrica-industrial">
+                        <div class="portfolio-image">
+                            <img src="assets/images/IMG_0519.jpeg" alt="Sala Técnica" loading="lazy">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-info">
+                                    <h4>Sala Técnica Industrial</h4>
+                                    <p>Equipamentos elétricos especializados</p>
+                                    <button class="view-project" onclick="openModal('project4')">Ver Detalhes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="portfolio-slide" data-category="eletrica-industrial">
+                        <div class="portfolio-image">
+                            <img src="assets/images/IMG_0522.jpeg" alt="Quadro Elétrico" loading="lazy">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-info">
+                                    <h4>Quadro Elétrico Industrial</h4>
+                                    <p>Instalação com disjuntores e proteções</p>
+                                    <button class="view-project" onclick="openModal('project5')">Ver Detalhes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="portfolio-slide" data-category="eletrica-industrial">
+                        <div class="portfolio-image">
+                            <img src="assets/images/IMG_0520.jpeg" alt="Equipamentos Alta Tensão" loading="lazy">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-info">
+                                    <h4>Equipamentos de Alta Tensão</h4>
+                                    <p>Instalação segura conforme normas</p>
+                                    <button class="view-project" onclick="openModal('project6')">Ver Detalhes</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="portfolio-item" data-category="eletrica-industrial">
-                    <div class="portfolio-image">
-                        <img src="assets/images/IMG_0518.jpeg" alt="Subestação Elétrica" loading="lazy">
-                        <div class="portfolio-overlay">
-                            <div class="portfolio-info">
-                                <h4>Subestação Elétrica</h4>
-                                <p>Instalação de alta tensão com segurança</p>
-                                <button class="view-project" onclick="openModal('project2')">Ver Detalhes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <!-- Botões de navegação -->
+                <button class="carousel-btn carousel-btn-prev" id="prevBtn">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-btn carousel-btn-next" id="nextBtn">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
                 
-                <div class="portfolio-item" data-category="eletrica-industrial">
-                    <div class="portfolio-image">
-                        <img src="assets/images/IMG_0517.jpeg" alt="Painel Elétrico Industrial" loading="lazy">
-                        <div class="portfolio-overlay">
-                            <div class="portfolio-info">
-                                <h4>Painel Elétrico Industrial</h4>
-                                <p>Controle e comando industrial</p>
-                                <button class="view-project" onclick="openModal('project3')">Ver Detalhes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="portfolio-item" data-category="eletrica-industrial">
-                    <div class="portfolio-image">
-                        <img src="assets/images/IMG_0519.jpeg" alt="Sala Técnica" loading="lazy">
-                        <div class="portfolio-overlay">
-                            <div class="portfolio-info">
-                                <h4>Sala Técnica Industrial</h4>
-                                <p>Equipamentos elétricos especializados</p>
-                                <button class="view-project" onclick="openModal('project4')">Ver Detalhes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="portfolio-item" data-category="eletrica-industrial">
-                    <div class="portfolio-image">
-                        <img src="assets/images/IMG_0522.jpeg" alt="Quadro Elétrico" loading="lazy">
-                        <div class="portfolio-overlay">
-                            <div class="portfolio-info">
-                                <h4>Quadro Elétrico Industrial</h4>
-                                <p>Instalação com disjuntores e proteções</p>
-                                <button class="view-project" onclick="openModal('project5')">Ver Detalhes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="portfolio-item" data-category="eletrica-industrial">
-                    <div class="portfolio-image">
-                        <img src="assets/images/IMG_0520.jpeg" alt="Equipamentos Alta Tensão" loading="lazy">
-                        <div class="portfolio-overlay">
-                            <div class="portfolio-info">
-                                <h4>Equipamentos de Alta Tensão</h4>
-                                <p>Instalação segura conforme normas</p>
-                                <button class="view-project" onclick="openModal('project6')">Ver Detalhes</button>
-                            </div>
-                        </div>
-                    </div>
+                <!-- Indicadores -->
+                <div class="carousel-indicators" id="carouselIndicators">
+                    <span class="indicator active" data-slide="0"></span>
+                    <span class="indicator" data-slide="1"></span>
+                    <span class="indicator" data-slide="2"></span>
+                    <span class="indicator" data-slide="3"></span>
+                    <span class="indicator" data-slide="4"></span>
+                    <span class="indicator" data-slide="5"></span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Videos Section -->
-    <section id="videos" class="videos">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Vídeos dos Projetos</h2>
-                <div class="section-line"></div>
-                <p class="section-subtitle">Veja nossos projetos em ação</p>
-            </div>
-            <div class="videos-grid" id="videos-grid">
-                <div class="video-item">
-                    <div class="video-container">
-                        <video controls preload="metadata">
-                            <source src="assets/images/IMG_0651.mov" type="video/mp4">
-                            <source src="assets/images/IMG_0651.mov" type="video/quicktime">
-                            Seu navegador não suporta o elemento de vídeo.
-                        </video>
-                    </div>
-                    <div class="video-info">
-                        <h4>Projeto Industrial 1</h4>
-                        <p>Demonstração de sistema em funcionamento</p>
-                    </div>
-                </div>
-                
-                <div class="video-item">
-                    <div class="video-container">
-                        <video controls preload="metadata">
-                            <source src="assets/images/IMG_0668.mov" type="video/mp4">
-                            <source src="assets/images/IMG_0668.mov" type="video/quicktime">
-                            Seu navegador não suporta o elemento de vídeo.
-                        </video>
-                    </div>
-                    <div class="video-info">
-                        <h4>Projeto Industrial 2</h4>
-                        <p>Instalação elétrica em operação</p>
-                    </div>
-                </div>
-                
-                <div class="video-item">
-                    <div class="video-container">
-                        <video controls preload="metadata">
-                            <source src="assets/images/IMG_0650.mov" type="video/mp4">
-                            <source src="assets/images/IMG_0650.mov" type="video/quicktime">
-                            Seu navegador não suporta o elemento de vídeo.
-                        </video>
-                    </div>
-                    <div class="video-info">
-                        <h4>Projeto Industrial 3</h4>
-                        <p>Sistema de automação funcionando</p>
-                    </div>
-                </div>
-                
-                <div class="video-item">
-                    <div class="video-container">
-                        <video controls preload="metadata">
-                            <source src="assets/images/IMG_1267.mov" type="video/mp4">
-                            <source src="assets/images/IMG_1267.mov" type="video/quicktime">
-                            Seu navegador não suporta o elemento de vídeo.
-                        </video>
-                    </div>
-                    <div class="video-info">
-                        <h4>Projeto Residencial 1</h4>
-                        <p>Automação residencial em ação</p>
-                    </div>
-                </div>
-                
-                <div class="video-item">
-                    <div class="video-container">
-                        <video controls preload="metadata">
-                            <source src="assets/images/IMG_1270.mov" type="video/mp4">
-                            <source src="assets/images/IMG_1270.mov" type="video/quicktime">
-                            Seu navegador não suporta o elemento de vídeo.
-                        </video>
-                    </div>
-                    <div class="video-info">
-                        <h4>Projeto Residencial 2</h4>
-                        <p>Sistema elétrico residencial</p>
-                    </div>
-                </div>
-                
-                <div class="video-item">
-                    <div class="video-container">
-                        <video controls preload="metadata">
-                            <source src="assets/images/AA2E4C6F-6FB2-4F2B-8D46-3CB1125347F7.mp4" type="video/mp4">
-                            Seu navegador não suporta o elemento de vídeo.
-                        </video>
-                    </div>
-                    <div class="video-info">
-                        <h4>Projeto Especial</h4>
-                        <p>Demonstração técnica completa</p>
-                    </div>
-                </div>
-                
-                <div class="video-item">
-                    <div class="video-container">
-                        <video controls preload="metadata">
-                            <source src="assets/images/IMG_1331.mov" type="video/mp4">
-                            <source src="assets/images/IMG_1331.mov" type="video/quicktime">
-                            Seu navegador não suporta o elemento de vídeo.
-                        </video>
-                    </div>
-                    <div class="video-info">
-                        <h4>Projeto Avançado</h4>
-                        <p>Sistema complexo em operação</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     <!-- Contact Section -->
     <section id="contact" class="contact">
