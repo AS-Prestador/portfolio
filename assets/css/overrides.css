@@ -1,0 +1,44 @@
+
+/* ====== Overrides gerais para uniformizar sem alterar o visual ====== */
+
+/* Anti-overflow global e ajustes de imagens/iframes */
+html, body { max-width: 100%; overflow-x: hidden; }
+.container, .header, .hero, .about, .services, .portfolio, .contact, .footer { overflow-x: hidden; }
+img, video { display:block; max-width: 100%; height: auto; }
+
+/* Ajuste do offset do header fixo para âncoras (#) */
+section[id] { scroll-margin-top: var(--header-height); }
+
+/* Tipografia consistente nas seções */
+.section-title { font-size: clamp(1.8rem, 4.5vw, 2.6rem); line-height: 1.2; }
+.section-subtitle { font-size: clamp(1rem, 2.6vw, 1.1rem); line-height: 1.6; }
+
+/* Padding vertical uniforme das seções */
+.about, .services, .portfolio, .contact { padding: clamp(56px, 8vw, 96px) 0; }
+
+/* Botões: mesmas dimensões e feedback */
+.btn { padding: 0.9rem 1.6rem; border-radius: var(--border-radius); }
+.btn:active { transform: translateY(0) scale(0.98); }
+
+/* Cartões e sombras padronizados */
+.service-card, .stat-item, .portfolio-slide, .contact-form {
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+}
+
+/* Header em telas pequenas: evita empurrar lateral */
+@media (max-width: 768px){
+  .nav-menu { width: 100vw; left: -100vw; } /* garante largura exata */
+  .nav-menu.active { left: 0; }
+}
+
+/* Hero: garante alinhamento central no mobile */
+@media (max-width: 768px){
+  .hero-container { padding: 0 16px; }
+  .floating-cards { width: 100%; max-width: 520px; margin: 0 auto; }
+}
+
+/* Galeria coverflow – pequenos refinamentos */
+.gallery { margin-top: 24px; }
+.gallery__btn { width: 44px; height: 44px; display:inline-flex; align-items:center; justify-content:center; }
+.caption { line-height: 1.4; }

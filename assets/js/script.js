@@ -52,70 +52,27 @@ navLinks.forEach(link => {
 });
 
 // Portfolio Carousel Functionality
-function updateCarousel() {
-    const slideWidth = 100 / slidesToShow;
-    const translateX = -(currentSlide * slideWidth);
-    carousel.style.transform = `translateX(${translateX}%)`;
-    
-    // Update indicators
-    indicators.forEach((indicator, index) => {
-        indicator.classList.toggle('active', index === currentSlide);
-    });
-    
-    // Update button states
-    prevBtn.style.opacity = currentSlide === 0 ? '0.5' : '1';
-    nextBtn.style.opacity = currentSlide >= totalSlides - slidesToShow ? '0.5' : '1';
+/* original updateCarousel disabled */
+
+/* original nextSlide disabled */
 }
 
-function nextSlide() {
-    if (currentSlide < totalSlides - slidesToShow) {
-        currentSlide++;
-        updateCarousel();
-    }
+/* original prevSlide disabled */
 }
 
-function prevSlide() {
-    if (currentSlide > 0) {
-        currentSlide--;
-        updateCarousel();
-    }
-}
-
-function goToSlide(slideIndex) {
-    if (slideIndex >= 0 && slideIndex <= totalSlides - slidesToShow) {
-        currentSlide = slideIndex;
-        updateCarousel();
-    }
+/* original goToSlide disabled */
 }
 
 // Event listeners for carousel
-prevBtn.addEventListener('click', prevSlide);
-nextBtn.addEventListener('click', nextSlide);
+/* disabled listener */
+/* disabled listener */
 
 indicators.forEach((indicator, index) => {
-    indicator.addEventListener('click', () => goToSlide(index));
+    /* disabled indicator */
 });
 
 // Auto-play carousel (opcional)
-let autoPlayInterval;
-function startAutoPlay() {
-    autoPlayInterval = setInterval(() => {
-        if (currentSlide >= totalSlides - slidesToShow) {
-            currentSlide = 0;
-        } else {
-            currentSlide++;
-        }
-        updateCarousel();
-    }, 5000); // Muda slide a cada 5 segundos
-}
-
-function stopAutoPlay() {
-    clearInterval(autoPlayInterval);
-}
-
-// Pause auto-play on hover
-carousel.addEventListener('mouseenter', stopAutoPlay);
-carousel.addEventListener('mouseleave', startAutoPlay);
+/* autoplay disabled block */
 
 // Portfolio Filtering (adaptado para carrossel)
 portfolioFilters.forEach(filter => {
@@ -143,26 +100,7 @@ portfolioFilters.forEach(filter => {
 });
 
 // Initialize carousel
-document.addEventListener('DOMContentLoaded', () => {
-    updateCarousel();
-    startAutoPlay();
-    
-    // Responsive carousel
-    function updateSlidesToShow() {
-        const width = window.innerWidth;
-        if (width <= 480) {
-            slidesToShow = 1;
-        } else if (width <= 768) {
-            slidesToShow = 2;
-        } else {
-            slidesToShow = 3;
-        }
-        updateCarousel();
-    }
-    
-    window.addEventListener('resize', updateSlidesToShow);
-    updateSlidesToShow();
-});
+/* carousel init disabled */
 
 // Modal functionality
 function openModal(projectId) {
@@ -177,7 +115,7 @@ function closeModalFunc() {
     document.body.style.overflow = 'auto';
 }
 
-closeModal.addEventListener('click', closeModalFunc);
+if (closeModal) closeModal.addEventListener('click', closeModalFunc);
 
 window.addEventListener('click', (e) => {
     if (e.target === modal) {
@@ -248,7 +186,7 @@ function createModalContent(project) {
 }
 
 // Contact Form
-contactForm.addEventListener('submit', (e) => {
+if (contactForm) contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
     
     const formData = new FormData(contactForm);
@@ -282,7 +220,7 @@ const observer = new IntersectionObserver((entries) => {
 // Observe elements for animation
 document.addEventListener('DOMContentLoaded', () => {
     const animateElements = document.querySelectorAll('.service-card, .portfolio-item, .stat-item, .contact-item');
-    animateElements.forEach(el => observer.observe(el));
+    if (animateElements && animateElements.length) animateElements.forEach(el => observer.observe(el));
 });
 
 // Header scroll effect
@@ -423,4 +361,56 @@ window.addVideo = addVideo;
 window.addPortfolioImage = addPortfolioImage;
 window.updateContactInfo = updateContactInfo;
 window.openModal = openModal;
+
+
+
+// === Guards added to avoid errors when elements are missing ===
+const hasCarousel = carousel && prevBtn && nextBtn && indicators && indicators.length !== undefined;
+if (hasCarousel) {
+    function updateCarousel() {
+        const slideWidth = 100 / slidesToShow;
+        const translateX = -(currentSlide * slideWidth);
+        carousel.style.transform = `translateX(${translateX}%)`;
+        indicators.forEach((indicator, index) => {
+            indicator.classList.toggle('active', index === currentSlide);
+        });
+        prevBtn.style.opacity = currentSlide === 0 ? '0.5' : '1';
+        nextBtn.style.opacity = currentSlide >= totalSlides - slidesToShow ? '0.5' : '1';
+    }
+    function nextSlide() { if (currentSlide < totalSlides - slidesToShow) { currentSlide++; updateCarousel(); } }
+    function prevSlide() { if (currentSlide > 0) { currentSlide--; updateCarousel(); } }
+    function goToSlide(slideIndex) {
+        if (slideIndex >= 0 && slideIndex <= totalSlides - slidesToShow) {
+            currentSlide = slideIndex; updateCarousel();
+        }
+    }
+    prevBtn.addEventListener('click', prevSlide);
+    nextBtn.addEventListener('click', nextSlide);
+    indicators.forEach((indicator, index) => { indicator.addEventListener('click', () => goToSlide(index)); });
+
+    let autoPlayInterval;
+    function startAutoPlay() {
+        autoPlayInterval = setInterval(() => {
+            if (currentSlide >= totalSlides - slidesToShow) currentSlide = 0;
+            else currentSlide++;
+            updateCarousel();
+        }, 5000);
+    }
+    function stopAutoPlay() { clearInterval(autoPlayInterval); }
+    carousel.addEventListener('mouseenter', stopAutoPlay);
+    carousel.addEventListener('mouseleave', startAutoPlay);
+
+    document.addEventListener('DOMContentLoaded', () => {
+        updateCarousel();
+        startAutoPlay();
+        function updateSlidesToShow() {
+            const width = window.innerWidth;
+            slidesToShow = (width <= 480) ? 1 : (width <= 768 ? 2 : 3);
+            updateCarousel();
+        }
+        window.addEventListener('resize', updateSlidesToShow);
+        updateSlidesToShow();
+    });
+}
+// === end guards ===
 
