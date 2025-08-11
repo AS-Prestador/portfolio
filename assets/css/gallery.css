@@ -1,5 +1,5 @@
 
-/* ====== Galeria Coverflow (iOS/mobile fix) ====== */
+/* ====== Galeria Coverflow (patch 2 – centro e anti-overflow) ====== */
 :root{
   --deck-h: 520px;
   --gap: 72px;
@@ -10,18 +10,15 @@
 }
 
 .gallery {
-  width: 100%;              /* evita 100vw em iOS que cria overflow */
+  width: 100%;
   margin: 48px auto 72px;
   padding: 0 12px;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-  overflow: hidden;         /* impede que a galeria force rolagem lateral */
+  overflow-x: clip;         /* mais forte que hidden em navegadores modernos */
+  position: relative;
 }
 
-.gallery__head {
-  display:flex; align-items:center; justify-content:space-between;
-  margin-bottom: 14px;
-}
-
+.gallery__head { display:flex; align-items:center; justify-content:space-between; margin-bottom: 14px; }
 .gallery__title { font-size: clamp(18px,2.4vw,24px); font-weight: 700; }
 .gallery__controls { display:flex; gap:10px; }
 
@@ -37,13 +34,13 @@
   perspective: 1200px;
   overflow: visible;
   user-select: none;
-  touch-action: pan-y;      /* evita empurrar lateral no iOS */
+  touch-action: pan-y;
+  contain: layout paint;    /* isola cálculos de layout para evitar "empurrar" a página */
 }
 
 .slide {
-  position: absolute; inset: 0;
-  display: grid; grid-template-rows: 1fr auto;
-  place-items: center;
+  position: absolute; top: 0; left: 50%; width: 100%;
+  display: grid; grid-template-rows: 1fr auto; place-items: center;
   will-change: transform, opacity;
   transition: transform .6s cubic-bezier(.22,.61,.36,1), opacity .4s ease;
 }
@@ -52,22 +49,16 @@
   width: 100%; height: calc(var(--deck-h) - 72px);
   border-radius: var(--radius); overflow: hidden;
   box-shadow: 0 20px 40px rgba(0,0,0,.25);
-  background: #000;
-  display:grid;
+  background: #000; display:grid;
 }
 
-.slide__img-wrap img {
-  width: 100%; height: 100%; object-fit: cover;
-}
+.slide__img-wrap img { width: 100%; height: 100%; object-fit: cover; }
 
 .caption {
-  margin-top: 12px;
-  padding: 8px 12px;
+  margin-top: 12px; padding: 8px 12px;
   background: rgba(255,255,255,.92);
-  border-radius: 12px;
-  max-width: 92%;
-  text-align: center;
-  font-size: 14px;
+  border-radius: 12px; max-width: 92%;
+  text-align: center; font-size: 14px;
   box-shadow: 0 6px 16px rgba(0,0,0,.12);
 }
 
@@ -82,19 +73,18 @@
 }
 
 @media (max-width: 600px){
-  :root{ --deck-h: 380px; --gap: 42px; --tilt: 14deg; --behind: -140px; }
+  :root{ --deck-h: 360px; --gap: 38px; --tilt: 12deg; --behind: -130px; }
 }
 
 @media (max-width: 480px){
-  :root{ --deck-h: 340px; --gap: 34px; --tilt: 12deg; --behind: -120px; }
+  :root{ --deck-h: 320px; --gap: 28px; --tilt: 10deg; --behind: -110px; }
   .caption{ font-size: 13px; }
 }
 
-/* A11y: foco nas setas */
 .gallery__btn:focus-visible{ outline: 2px solid #111; outline-offset: 2px; }
 
-/* Fallback simples (sem JS): vira uma mini-grade */
+/* Fallback simples (sem JS): mini-grade */
 .no-js .deck { height: auto; display:grid; gap:14px; grid-template-columns: 1fr 1fr; }
-.no-js .slide { position: static; transform: none !important; }
+.no-js .slide { position: static; left: 0; transform: none !important; }
 .no-js .slide__img-wrap { height: 220px; }
 @media (max-width: 640px){ .no-js .deck { grid-template-columns: 1fr; } }

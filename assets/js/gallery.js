@@ -1,4 +1,5 @@
-/* ====== Galeria Coverflow com setas, arraste e swipe ====== */
+
+/* ====== Galeria Coverflow (patch 2 – âncora central) ====== */
 (function () {
   const $gallery = document.querySelector("[data-gallery]");
   if (!$gallery) return;
@@ -10,9 +11,7 @@
 
   let active = 0;
 
-  function cssVar(name) {
-    return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
-  }
+  function cssVar(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
 
   function positionSlides() {
     const gap = parseFloat(cssVar('--gap'));
@@ -21,15 +20,16 @@
     const behind = parseFloat(cssVar('--behind'));
 
     slides.forEach((el, i) => {
-      const delta = i - active;
+      const delta = i - active;          // 0 = destaque
       el.dataset.pos = String(delta);
 
+      // deslocamento horizontal: a partir do centro da deck
       const translateX = delta * gap;
       const rotateY = delta === 0 ? 0 : (delta > 0 ? -1 : 1) * tilt;
       const scale = 1 - Math.min(Math.abs(delta) * scaleStep, .6);
       const translateZ = delta === 0 ? 0 : behind * Math.min(Math.abs(delta), 2);
 
-      el.style.transform = `translateX(${translateX}px) rotateY(${rotateY}deg) translateZ(${translateZ}px) scale(${scale})`;
+      el.style.transform = `translateX(-50%) translateX(${translateX}px) rotateY(${rotateY}deg) translateZ(${translateZ}px) scale(${scale})`;
       el.style.zIndex = String(100 - Math.abs(delta));
       el.style.opacity = Math.abs(delta) > 3 ? 0 : 1;
     });
@@ -52,7 +52,7 @@
   const onMove = (x) => {
     if (!dragging) return;
     const dx = x - startX;
-    if (Math.abs(dx) > 60) {
+    if (Math.abs(dx) > 50) {
       dragging = false;
       dx < 0 ? go(active + 1) : go(active - 1);
     }
@@ -67,6 +67,5 @@
   deck.addEventListener("touchmove", e => onMove(e.touches[0].clientX), {passive:true});
   deck.addEventListener("touchend", onUp);
 
-  // Inicializa
   positionSlides();
 })();
