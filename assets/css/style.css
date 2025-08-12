@@ -890,6 +890,7 @@ body {
         text-align: center;
         transition: var(--transition);
         padding: 2rem 0;
+        z-index: 1001;
     }
 
     .nav-menu.active {
@@ -929,13 +930,13 @@ body {
         font-size: 1.4rem;
     }
 
-    /* Reposicionamento dos cards para mobile - Mantendo posicionamento absoluto */
-    .card-1 { top: 5%; left: 20%; }
+    /* Reposicionamento dos cards para mobile - sem sobrepor */
+    .card-1 { top: 5%; left: 28%; }           /* puxado um pouco mais pro centro */
     .card-2 { top: 10%; right: 5%; }
     .card-3 { top: 35%; right: 10%; }
     .card-4 { bottom: 20%; right: 5%; }
     .card-5 { bottom: 5%; left: 20%; }
-    .card-6 { bottom: 20%; left: 5%; }
+    .card-6 { bottom: 20%; left: 12%; }       /* cabine primária mais ao centro */
     .card-7 { top: 35%; left: 10%; }
     .card-8 { top: 10%; left: 5%; }
 
@@ -975,8 +976,6 @@ body {
     .carousel-btn-next {
         right: 5px;
     }
-
-
 
     .contact-content {
         grid-template-columns: 1fr;
@@ -1051,12 +1050,12 @@ body {
     }
 
     /* Ajuste fino do posicionamento para telas muito pequenas */
-    .card-1 { top: 8%; left: 15%; }
+    .card-1 { top: 8%; left: 22%; }      /* mais ao centro */
     .card-2 { top: 12%; right: 8%; }
     .card-3 { top: 38%; right: 12%; }
     .card-4 { bottom: 22%; right: 8%; }
     .card-5 { bottom: 8%; left: 15%; }
-    .card-6 { bottom: 22%; left: 8%; }
+    .card-6 { bottom: 22%; left: 14%; }  /* cabine primária mais ao centro */
     .card-7 { top: 38%; left: 12%; }
     .card-8 { top: 12%; left: 8%; }
 }
@@ -1103,7 +1102,11 @@ html {
     display: block;
 }
 
-
+/* Extra tiny phones */
+@media (max-width: 360px) {
+    .card-1 { left: 24%; }
+    .card-6 { left: 16%; }
+}
 
 /* Media Query para telas muito pequenas */
 @media (max-width: 480px) {
@@ -1125,12 +1128,4 @@ html {
         padding: 0.5rem 1rem;
         font-size: 0.9rem;
     }
-}
-
-/* --- Mobile fine-tune override (evitar sobreposição do card-1) --- */
-@media (max-width: 768px) {
-  .card-1 {
-    left: 28% !important;
-    top: 7% !important;
-  }
 }
