@@ -404,7 +404,7 @@
         </article>
 <article class="slide">
           <div class="slide__img-wrap">
-            <img data-src-base="assets/images/Quadro de distribuição de ar condicionado" data-src-enc="assets/images/Quadro%20de%20distribui%C3%A7%C3%A3o%20de%20ar%20condicionado" alt="Quadro de distribuição de ar-condicionado" loading="lazy">
+            <img data-src-base="assets/images/quadro-ar-condicionado" data-src-enc="assets/images/quadro-ar-condicionado" alt="Quadro de distribuição de ar-condicionado" loading="lazy">
           </div>
           <p class="caption">Quadro de distribuição de ar-condicionado</p>
         </article>
@@ -428,7 +428,7 @@
         </article>
 <article class="slide">
           <div class="slide__img-wrap">
-            <img data-src-base="assets/images/Paines de controle dos ventiladores" data-src-enc="assets/images/Paines%20de%20controle%20dos%20ventiladores" alt="Painéis de controle dos ventiladores" loading="lazy">
+            <img data-src-base="assets/images/Paineis de controle dos ventiladores" data-src-enc="assets/images/Paineis%20de%20controle%20dos%20ventiladores" alt="Painéis de controle dos ventiladores" loading="lazy">
           </div>
           <p class="caption">Painéis de controle dos ventiladores</p>
         </article>
@@ -543,7 +543,7 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const EXTS = ['jpg','JPG','jpeg','JPEG','png','PNG','webp','WEBP'];
+      const EXTS = ['jpg','JPG','jpeg','JPEG','png','PNG','webp','WEBP','heic','HEIC'];
       document.querySelectorAll('.slide img[data-src-base]').forEach(img => {
         const base = img.getAttribute('data-src-base');
         const enc = img.getAttribute('data-src-enc');
@@ -551,14 +551,14 @@
         EXTS.forEach(ext => { candidates.push(`${base}.${ext}`); candidates.push(`${enc}.${ext}`); });
         let i = 0;
         const tryNext = () => {
-          if (i >= candidates.length) { img.alt += ' (arquivo não encontrado)'; return; }
+          if (i >= candidates.length) { return; }
           const url = candidates[i++];
           const probe = new Image();
           probe.onload = () => { img.src = url; };
           probe.onerror = tryNext;
           probe.src = url;
         };
-        tryNext();
+        if(!img.getAttribute('src')) tryNext();
       });
     });
     </script>
