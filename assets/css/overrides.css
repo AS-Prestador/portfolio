@@ -1,73 +1,64 @@
 
-/* ===== A.S Prestador – Mobile/Layout Fixes (safe overrides) ===== */
+/* ===== Mobile/Layout Fixes v2 ===== */
 
-/* 1) Remove qualquer scroll lateral forçado por elementos */
-html, body {
-  max-width: 100%;
-  overflow-x: hidden;
-}
+/* 0) Segurança geral: nada vaza para os lados */
+html, body { max-width:100%; overflow-x:hidden; }
+.container, .header, .hero, .about, .services, .portfolio, .contact, .footer { overflow-x:hidden; }
+img, video { max-width:100%; height:auto; display:block; }
 
-/* Trave quaisquer containers que possam "vazar" */
-.container, .header, .hero, .about, .services, .portfolio, .contact, .footer {
-  overflow-x: hidden;
-}
+/* 1) Header e hamburger clicáveis acima de tudo */
+.header { z-index:3000 !important; }
+.hamburger { width:48px; height:40px; padding:6px; cursor:pointer; position:relative; z-index:3100 !important; pointer-events:auto !important; }
+.nav-menu { z-index:3200 !important; }
+.nav-menu a, .nav-menu li { pointer-events:auto !important; }
 
-/* 2) Header/Hamburger acima de tudo e clicável */
-.header { z-index: 3000 !important; }
-.hamburger { position: relative; z-index: 3100 !important; pointer-events: auto !important; }
-.nav-menu { z-index: 3200 !important; }
-.nav-menu a, .nav-menu li { pointer-events: auto !important; }
+/* 2) Logo: usa background (logo-text.png) e oculta <img> quebrado, se houver */
+.nav-logo { min-width:180px; height:50px; display:flex; align-items:center; }
+.nav-logo { background:url('../images/logo-text.png') left center / contain no-repeat; }
+.nav-logo img.logo { opacity:0; width:0; height:0; display:none; }
 
-/* 3) Compensação do scroll para seções com âncora (títulos não ficam escondidos) */
-section[id] { scroll-margin-top: calc(var(--header-height, 80px) + 12px); }
+/* 3) Scroll de âncora não esconder títulos */
+section[id]{ scroll-margin-top: calc(var(--header-height,80px) + 10px); }
 
-/* 4) Hero – Cartões flutuantes sem sobreposição no mobile
-      - Em telas pequenas viram uma grade de 2 colunas
-      - Mantém leve animação de flutuação */
-@media (max-width: 768px) {
-  .floating-cards {
-    position: relative !important;
-    display: grid !important;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    height: auto !important;
-    padding: 6px 8px 2px;
+/* 4) Floating Cards – mantém ABSOLUTE no mobile, mas sem sobreposição */
+@media (max-width: 768px){
+  .floating-cards{ position:relative !important; height: 640px !important; }
+  .floating-cards .card{
+    position:absolute !important;
+    width:44vw; max-width:none; min-width:auto;
+    animation: floatSoft 7s ease-in-out infinite;
   }
-  .floating-cards .card {
-    position: relative !important;
-    top: auto !important; left: auto !important; right: auto !important; bottom: auto !important;
-    transform: none !important;
-    min-width: auto !important; max-width: 100% !important;
-    width: 100%;
-    animation: floatMobile 6s ease-in-out infinite;
-  }
-  /* Ícone e tipografia um pouco menores para caber melhor */
-  .floating-cards .card i { font-size: 1.4rem !important; }
-  .floating-cards .card span { font-size: .9rem !important; }
-}
-@media (max-width: 480px) {
-  .floating-cards {
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
-  .floating-cards .card i { font-size: 1.3rem !important; }
-  .floating-cards .card span { font-size: .95rem !important; }
+  /* Grid 2 col x 4 linhas */
+  .floating-cards .card-1{ top: 4%;  left: 6%; }
+  .floating-cards .card-2{ top: 4%;  right: 6%; }
+  .floating-cards .card-3{ top: 28%; left: 6%; }
+  .floating-cards .card-4{ top: 28%; right: 6%; }
+  .floating-cards .card-5{ top: 52%; left: 6%; }
+  .floating-cards .card-6{ top: 52%; right: 6%; }
+  .floating-cards .card-7{ top: 76%; left: 6%; }
+  .floating-cards .card-8{ top: 76%; right: 6%; }
+  /* Tipos um pouco menores para caber bem */
+  .floating-cards .card i{ font-size:1.4rem !important; }
+  .floating-cards .card span{ font-size:.92rem !important; }
 }
 
-/* Animação leve no mobile (amplitude menor para não saltar) */
-@keyframes floatMobile {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+@media (max-width: 480px){
+  .floating-cards{ height: 740px !important; }
+  .floating-cards .card{ width: 46vw; }
+  .floating-cards .card span{ font-size:.98rem !important; }
 }
 
-/* 5) Tipografia e espaçamentos no "Sobre" para leitura confortável no iPhone */
-@media (max-width: 768px) {
-  .about-text p { font-size: 1.05rem !important; line-height: 1.85 !important; }
-  .section-title { font-size: 2rem !important; }
+/* Animação mais suave (menos amplitude) */
+@keyframes floatSoft{
+  0%,100%{ transform: translateY(0); }
+  50%{ transform: translateY(-6px); }
 }
 
-/* 6) Botões do slider – área de toque amigável */
-.gallery__btn { touch-action: manipulation; }
+/* 5) Leitura confortável na seção "Sobre" */
+@media (max-width: 768px){
+  .about-text p{ font-size:1.02rem !important; line-height:1.9 !important; color:#666 !important; }
+  .section-title{ font-size:2.1rem !important; }
+}
 
-/* 7) Garantir que imagens nunca quebrem o layout */
-img { max-width: 100% !important; height: auto; }
+/* 6) Slider: botões amigáveis ao toque */
+.gallery__btn{ touch-action:manipulation; }
