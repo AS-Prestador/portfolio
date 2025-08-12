@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A.S Prestador - Automação, Elétrica e Climatização</title>
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/gallery.css">
-    <link rel="stylesheet" href="assets/css/overrides.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -269,7 +267,7 @@
         </div>
     </section>
 
-        <!-- Portfolio Section (Coverflow) -->
+    <!-- Portfolio Section -->
     <section id="portfolio" class="portfolio">
         <div class="container">
             <div class="section-header">
@@ -277,56 +275,112 @@
                 <div class="section-line"></div>
                 <p class="section-subtitle">Conheça alguns dos nossos principais projetos</p>
             </div>
-
-            <section class="gallery no-js" data-gallery>
-              <div class="gallery__head">
-                <h3 class="gallery__title">Portfólio em Destaque</h3>
-                <div class="gallery__controls">
-                  <button class="gallery__btn" data-prev aria-label="Foto anterior">←</button>
-                  <button class="gallery__btn" data-next aria-label="Próxima foto">→</button>
+            <div class="portfolio-filters">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="automacao-industrial">Automação Industrial</button>
+                <button class="filter-btn" data-filter="automacao-residencial">Automação Residencial</button>
+                <button class="filter-btn" data-filter="eletrica-industrial">Elétrica Industrial</button>
+                <button class="filter-btn" data-filter="eletrica-residencial">Elétrica Residencial</button>
+            </div>
+            <div class="portfolio-carousel-container">
+                <div class="portfolio-carousel" id="portfolio-carousel">
+                    <div class="portfolio-slide" data-category="automacao-industrial">
+                        <div class="portfolio-image">
+                            <img src="assets/images/IMG_0515.jpeg" alt="Painel de Controle Industrial" loading="lazy">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-info">
+                                    <h4>Painel de Controle Industrial</h4>
+                                    <p>Sistema de automação com interface HMI</p>
+                                    <button class="view-project" onclick="openModal('project1')">Ver Detalhes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="portfolio-slide" data-category="eletrica-industrial">
+                        <div class="portfolio-image">
+                            <img src="assets/images/IMG_0518.jpeg" alt="Subestação Elétrica" loading="lazy">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-info">
+                                    <h4>Subestação Elétrica</h4>
+                                    <p>Instalação de alta tensão com segurança</p>
+                                    <button class="view-project" onclick="openModal('project2')">Ver Detalhes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="portfolio-slide" data-category="eletrica-industrial">
+                        <div class="portfolio-image">
+                            <img src="assets/images/IMG_0517.jpeg" alt="Painel Elétrico Industrial" loading="lazy">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-info">
+                                    <h4>Painel Elétrico Industrial</h4>
+                                    <p>Controle e comando industrial</p>
+                                    <button class="view-project" onclick="openModal('project3')">Ver Detalhes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="portfolio-slide" data-category="eletrica-industrial">
+                        <div class="portfolio-image">
+                            <img src="assets/images/IMG_0519.jpeg" alt="Sala Técnica" loading="lazy">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-info">
+                                    <h4>Sala Técnica Industrial</h4>
+                                    <p>Equipamentos elétricos especializados</p>
+                                    <button class="view-project" onclick="openModal('project4')">Ver Detalhes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="portfolio-slide" data-category="eletrica-industrial">
+                        <div class="portfolio-image">
+                            <img src="assets/images/IMG_0522.jpeg" alt="Quadro Elétrico" loading="lazy">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-info">
+                                    <h4>Quadro Elétrico Industrial</h4>
+                                    <p>Instalação com disjuntores e proteções</p>
+                                    <button class="view-project" onclick="openModal('project5')">Ver Detalhes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="portfolio-slide" data-category="eletrica-industrial">
+                        <div class="portfolio-image">
+                            <img src="assets/images/IMG_0520.jpeg" alt="Equipamentos Alta Tensão" loading="lazy">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-info">
+                                    <h4>Equipamentos de Alta Tensão</h4>
+                                    <p>Instalação segura conforme normas</p>
+                                    <button class="view-project" onclick="openModal('project6')">Ver Detalhes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-
-              <div class="deck">
-
-    <article class="slide">
-      <div class="slide__img-wrap">
-        <img src="assets/images/IMG_0515.jpeg" alt="Painel de Controle Industrial" loading="lazy">
-      </div>
-      <p class="caption">Painel de Controle Industrial — Sistema de automação com interface HMI</p>
-    </article>
-    <article class="slide">
-      <div class="slide__img-wrap">
-        <img src="assets/images/IMG_0518.jpeg" alt="Subestação Elétrica" loading="lazy">
-      </div>
-      <p class="caption">Subestação Elétrica — Instalação de alta tensão com segurança</p>
-    </article>
-    <article class="slide">
-      <div class="slide__img-wrap">
-        <img src="assets/images/IMG_0517.jpeg" alt="Painel Elétrico Industrial" loading="lazy">
-      </div>
-      <p class="caption">Painel Elétrico Industrial — Controle e comando industrial</p>
-    </article>
-    <article class="slide">
-      <div class="slide__img-wrap">
-        <img src="assets/images/IMG_0519.jpeg" alt="Sala Técnica Industrial" loading="lazy">
-      </div>
-      <p class="caption">Sala Técnica Industrial — Equipamentos elétricos especializados</p>
-    </article>
-    <article class="slide">
-      <div class="slide__img-wrap">
-        <img src="assets/images/IMG_0522.jpeg" alt="Quadro Elétrico Industrial" loading="lazy">
-      </div>
-      <p class="caption">Quadro Elétrico Industrial — Instalação com disjuntores e proteções</p>
-    </article>
-    <article class="slide">
-      <div class="slide__img-wrap">
-        <img src="assets/images/IMG_0520.jpeg" alt="Equipamentos de Alta Tensão" loading="lazy">
-      </div>
-      <p class="caption">Equipamentos de Alta Tensão — Instalação segura conforme normas</p>
-    </article>
-              </div>
-            </section>
+                
+                <!-- Botões de navegação -->
+                <button class="carousel-btn carousel-btn-prev" id="prevBtn">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-btn carousel-btn-next" id="nextBtn">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                
+                <!-- Indicadores -->
+                <div class="carousel-indicators" id="carouselIndicators">
+                    <span class="indicator active" data-slide="0"></span>
+                    <span class="indicator" data-slide="1"></span>
+                    <span class="indicator" data-slide="2"></span>
+                    <span class="indicator" data-slide="3"></span>
+                    <span class="indicator" data-slide="4"></span>
+                    <span class="indicator" data-slide="5"></span>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -430,13 +484,27 @@
         </div>
     </div>
 
-    <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll(".no-js").forEach(el => el.classList.remove("no-js"));
-  });
-</script>
-    <script src="assets/js/gallery.js"></script>
     <script src="assets/js/script.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.slide img[data-src-base]').forEach(img => {
+    const base = img.getAttribute('data-src-base');
+    const exts = (img.getAttribute('data-exts') || 'jpg,jpeg,png,webp').split(',');
+    let i = 0;
+    const tryNext = () => {
+      if (i >= exts.length) { img.alt += ' (arquivo não encontrado)'; return; }
+      const candidate = `${base}.${exts[i++].trim()}`;
+      const test = new Image();
+      test.onload = () => { img.src = candidate; };
+      test.onerror = tryNext;
+      test.src = candidate;
+    };
+    tryNext();
+  });
+});
+</script>
+
 </body>
 </html>
 
