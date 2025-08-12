@@ -1,64 +1,72 @@
 
-/* ===== Mobile/Layout Fixes v2 ===== */
+/* ===== A.S Prestador – Overrides v3 (mobile cards precise + hamburger) ===== */
 
-/* 0) Segurança geral: nada vaza para os lados */
+/* Nada vaza lateral */
 html, body { max-width:100%; overflow-x:hidden; }
 .container, .header, .hero, .about, .services, .portfolio, .contact, .footer { overflow-x:hidden; }
 img, video { max-width:100%; height:auto; display:block; }
 
-/* 1) Header e hamburger clicáveis acima de tudo */
+/* Header acima de tudo */
 .header { z-index:3000 !important; }
-.hamburger { width:48px; height:40px; padding:6px; cursor:pointer; position:relative; z-index:3100 !important; pointer-events:auto !important; }
+.hamburger { position:relative; z-index:3100 !important; width:48px; height:40px; padding:6px; cursor:pointer; }
 .nav-menu { z-index:3200 !important; }
-.nav-menu a, .nav-menu li { pointer-events:auto !important; }
 
-/* 2) Logo: usa background (logo-text.png) e oculta <img> quebrado, se houver */
-.nav-logo { min-width:180px; height:50px; display:flex; align-items:center; }
-.nav-logo { background:url('../images/logo-text.png') left center / contain no-repeat; }
-.nav-logo img.logo { opacity:0; width:0; height:0; display:none; }
-
-/* 3) Scroll de âncora não esconder títulos */
-section[id]{ scroll-margin-top: calc(var(--header-height,80px) + 10px); }
-
-/* 4) Floating Cards – mantém ABSOLUTE no mobile, mas sem sobreposição */
+/* Força o menu mobile a abrir quando .active for aplicado pelo JS */
 @media (max-width: 768px){
-  .floating-cards{ position:relative !important; height: 640px !important; }
-  .floating-cards .card{
-    position:absolute !important;
-    width:44vw; max-width:none; min-width:auto;
-    animation: floatSoft 7s ease-in-out infinite;
+  .nav-menu { left:-100% !important; }
+  .nav-menu.active { left:0 !important; }
+}
+
+/* Corrige âncoras com header fixo */
+section[id]{ scroll-margin-top: calc(var(--header-height,80px) + 12px); }
+
+/* --------- FLOATING CARDS (sem sobreposição no mobile) --------- */
+@media (max-width: 768px){
+  .floating-cards{
+    position:relative !important;
+    height: 860px !important; /* espaço suficiente para 4 linhas */
+    padding-top: 4px;
   }
-  /* Grid 2 col x 4 linhas */
-  .floating-cards .card-1{ top: 4%;  left: 6%; }
-  .floating-cards .card-2{ top: 4%;  right: 6%; }
-  .floating-cards .card-3{ top: 28%; left: 6%; }
-  .floating-cards .card-4{ top: 28%; right: 6%; }
-  .floating-cards .card-5{ top: 52%; left: 6%; }
-  .floating-cards .card-6{ top: 52%; right: 6%; }
-  .floating-cards .card-7{ top: 76%; left: 6%; }
-  .floating-cards .card-8{ top: 76%; right: 6%; }
-  /* Tipos um pouco menores para caber bem */
-  .floating-cards .card i{ font-size:1.4rem !important; }
-  .floating-cards .card span{ font-size:.92rem !important; }
+  .floating-cards > .card{
+    position:absolute !important;
+    width: 42vw; /* duas colunas */
+    min-width: auto !important;
+    max-width: none !important;
+    transform: none;
+    animation: floatMobile 7s ease-in-out infinite;
+  }
+  /* 2 colunas (esquerda 6%, direita 52%) e 4 linhas (tops) */
+  .floating-cards > .card-1{ top: 4%;  left: 6%;  }
+  .floating-cards > .card-2{ top: 4%;  left: 52%; }
+  .floating-cards > .card-3{ top: 27%; left: 6%;  }
+  .floating-cards > .card-4{ top: 27%; left: 52%; }
+  .floating-cards > .card-5{ top: 50%; left: 6%;  }
+  .floating-cards > .card-6{ top: 50%; left: 52%; }
+  .floating-cards > .card-7{ top: 73%; left: 6%;  }
+  .floating-cards > .card-8{ top: 73%; left: 52%; }
+  /* Tipos um pouco menores */
+  .floating-cards > .card i{ font-size: 1.35rem !important; }
+  .floating-cards > .card span{ font-size: .92rem !important; }
 }
 
 @media (max-width: 480px){
-  .floating-cards{ height: 740px !important; }
-  .floating-cards .card{ width: 46vw; }
-  .floating-cards .card span{ font-size:.98rem !important; }
+  .floating-cards{ height: 980px !important; }
+  .floating-cards > .card{ width: 44vw; }
+  .floating-cards > .card span{ font-size: .98rem !important; }
 }
 
-/* Animação mais suave (menos amplitude) */
-@keyframes floatSoft{
+/* flutuação suave só para dar vida */
+@keyframes floatMobile{
   0%,100%{ transform: translateY(0); }
   50%{ transform: translateY(-6px); }
 }
 
-/* 5) Leitura confortável na seção "Sobre" */
+/* --------- Texto "Sobre" mais confortável --------- */
 @media (max-width: 768px){
-  .about-text p{ font-size:1.02rem !important; line-height:1.9 !important; color:#666 !important; }
-  .section-title{ font-size:2.1rem !important; }
+  .about-text p{ font-size: 1.04rem !important; line-height: 1.9 !important; color:#666 !important; }
+  .section-title{ font-size: 2.1rem !important; }
 }
 
-/* 6) Slider: botões amigáveis ao toque */
-.gallery__btn{ touch-action:manipulation; }
+/* --------- Logo por background (mantém sua logo nova) --------- */
+.nav-logo { min-width:180px; height:50px; display:flex; align-items:center; background:url('../images/logo-text.png') left center/contain no-repeat; }
+.nav-logo img.logo { display:none; }
