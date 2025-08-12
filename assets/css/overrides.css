@@ -1,18 +1,32 @@
-/* Nav logo uses transparent PNG with only the gold text */
-.nav-logo { position: relative; display:flex; align-items:center; }
-.nav-logo .logo { opacity: 0; width: 0; height: 0; } /* esconde a imagem antiga (logo.jpg) */
+
+/* ===== Overrides — LOGO (corrige caminhos relativos) ===== */
+
+/* Esconde a imagem antiga <img src="assets/images/logo.jpg"> */
+.nav-logo .logo{ display:none; }
+
+/* Usa a logo transparente via pseudo-elemento (caminho relativo ao CSS em assets/css/) */
+.nav-logo{ position: relative; display:flex; align-items:center; min-height: 56px; }
 .nav-logo::after{
   content:"";
   display:block;
   width: clamp(160px, 18vw, 240px);
   height: clamp(36px, 5vw, 56px);
-  background: url('assets/images/logo-text.png') left center / contain no-repeat;
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  /* Fallback padrão */
+  background-image: url('../images/logo-text.png');
+
+  /* Suporte retina (2x) — mantém compatibilidade */
+  background-image: image-set(url('../images/logo-text.png') 1x, url('../images/logo-text@2x.png') 2x);
+  background-image: -webkit-image-set(url('../images/logo-text.png') 1x, url('../images/logo-text@2x.png') 2x);
+
   filter: drop-shadow(0 0 6px rgba(212,175,55,.35));
 }
+
 :root { --header-height: 84px; }
 @media (max-width: 768px){
   :root { --header-height: 74px; }
   .nav-logo::after{ width: clamp(150px, 40vw, 210px); height: 48px; }
 }
-
-/* Favicon/OG hints (para referência de inclusão no HTML/head) */
