@@ -1,9 +1,12 @@
 
-/* Overrides — logo + layout */
+/* Keep logo + layout stable + ensure hamburger clickable */
 html, body { max-width: 100%; overflow-x: hidden; }
 .container, .header, .hero, .about, .services, .portfolio, .contact, .footer { overflow-x: hidden; }
 img, video { display:block; max-width:100%; height:auto; }
 section[id]{ scroll-margin-top: var(--header-height); }
+
+.header { z-index: 2000; }
+.hamburger { position: relative; z-index: 2100; pointer-events: auto; }
 
 .nav-logo .logo{ display:none; }
 .nav-logo{ position:relative; display:flex; align-items:center; min-height:56px; }
@@ -12,22 +15,10 @@ section[id]{ scroll-margin-top: var(--header-height); }
   background: url('../images/logo-text.png') left center / contain no-repeat;
   filter: drop-shadow(0 0 6px rgba(212,175,55,.35));
 }
+
 :root { --header-height: 84px; }
 @media (max-width:768px){
   :root { --header-height: 74px; }
   .nav-menu{ width:100vw; left:-100vw; }
   .nav-menu.active{ left:0; }
-}
-/* About stats */
-.about-text p { word-wrap: break-word; }
-@media (max-width:768px){
-  .about .container{ padding: 0 16px; }
-  .about .about-stats{ display:grid !important; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px; }
-  .about .stat-item{ min-width:0; padding:1.25rem 1rem; }
-  .about .stat-number{ font-size:2rem; }
-}
-@media (max-width:420px){
-  .about .about-stats{ grid-template-columns:1fr; }
-  .about .stat-item{ padding:1rem; }
-  .about .stat-number{ font-size:1.8rem; }
 }
