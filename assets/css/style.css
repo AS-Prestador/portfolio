@@ -1127,3 +1127,27 @@ html {
     }
 }
 
+
+
+/* ======== PATCH: Logo visível, sem quadrado preto e maior ======== */
+.nav-logo .logo,
+.footer-logo .logo {
+    display: block;
+    height: 62px;          /* desktop */
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    background: transparent !important;
+    -webkit-user-drag: none;
+    image-rendering: auto;
+}
+
+/* garante que o header tenha espaço para a logo maior */
+:root { --header-height: 84px; }
+
+@media (max-width: 768px) {
+    .nav-logo .logo,
+    .footer-logo .logo {
+        height: 56px;      /* mobile */
+    }
+}
