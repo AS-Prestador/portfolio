@@ -1,4 +1,22 @@
 
+/* ===== Header & Logo sizing ===== */
+:root {
+  /* aumenta a altura do header para caber a logo maior */
+  --header-height: 88px;
+}
+
+.nav-logo .logo {
+  display: block;
+  height: 60px;   /* desktop */
+  width: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  :root { --header-height: 84px; }  /* mobile header */
+  .nav-logo .logo { height: 56px; } /* mobile logo */
+}
+
 /* ===== Mobile floating cards — orgânico, animado e sem sobreposição ===== */
 @media (max-width: 480px) {
   /* Corrige área inferior (home indicator do iPhone) e espaço geral */
@@ -69,14 +87,5 @@
   .floating-cards .card span { font-size: 13px; }
 }
 
-/* ===== Logo fallback: se a imagem .jpg não existir, mantém altura e evita “quebra” ===== */
-.nav-logo .logo {
-  display: block;
-  height: 50px;
-  width: auto;
-  object-fit: contain;
-  background-repeat: no-repeat;
-}
-
-/* Oculta o ícone de imagem quebrada no iOS/Safari se houver CSS de background em algum momento */
+/* ===== Detalhe: oculta ícone quebrado do iOS quando houver fallback visual ===== */
 .nav-logo .logo:after { display: none !important; }
