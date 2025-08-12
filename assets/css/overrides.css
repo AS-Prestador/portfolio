@@ -1,15 +1,11 @@
 
-/* ===== A.S Prestador – Overrides v4 (mobile tidy + hamburger) ===== */
+/* ===== A.S Prestador — Overrides v5 (mobile flutuante orgânico + hamburger) ===== */
 
-/* Geral: impedir scroll lateral */
-html, body { max-width:100%; overflow-x:hidden; }
+/* Evitar scroll lateral */
+html, body { max-width: 100%; overflow-x: hidden; }
 
-/* Header por cima e clicável */
-.header {
-  position: fixed !important;
-  top:0; left:0; right:0;
-  z-index: 5000 !important;
-}
+/* Header sempre por cima e clicável */
+.header { position: fixed !important; top:0; left:0; right:0; z-index: 5000 !important; }
 .hamburger{
   position: relative;
   z-index: 6000 !important;
@@ -20,7 +16,7 @@ html, body { max-width:100%; overflow-x:hidden; }
 }
 .header * { pointer-events: auto !important; }
 
-/* Menu mobile: certeza de abrir ao receber .active */
+/* Menu mobile abrindo pela esquerda */
 @media (max-width: 768px){
   .nav-menu{
     position: fixed !important;
@@ -29,7 +25,7 @@ html, body { max-width:100%; overflow-x:hidden; }
     right: 0;
     width: 100%;
     z-index: 5500 !important;
-    transition: transform .3s ease, left .3s ease !important;
+    transition: left .3s ease !important;
   }
   .nav-menu.active{ left: 0 !important; }
   body.menu-open { overflow: hidden; }
@@ -38,55 +34,71 @@ html, body { max-width:100%; overflow-x:hidden; }
 /* Compensar header nas âncoras */
 section[id]{ scroll-margin-top: calc(var(--header-height,80px) + 12px); }
 
-/* ---- FLOATING CARDS (mobile 2x4, altura fixa) ---- */
+/* ---- FLOATING CARDS (mobile: orgânico, sem overlap) ---- */
 @media (max-width: 768px){
   .floating-cards{
     position: relative !important;
-    height: 980px !important; /* altura suficiente */
+    height: 1100px !important; /* espaço para 8 cards sem sobrepor */
     padding-top: 6px;
   }
   .floating-cards > .card{
     position: absolute !important;
-    width: 44vw;
-    height: 120px; /* padroniza altura para grid consistente */
+    width: 44vw;             /* duas colunas, com respiro */
+    height: 126px;           /* altura fixa pra não encostar */
     min-width: 0 !important;
     max-width: none !important;
-    transform: none !important;
-    animation: floatMobile 7s ease-in-out infinite;
+    transform: none;
+    box-shadow: var(--shadow);
   }
-  /* Colunas fixas */
-  .floating-cards > .card-1{ top:  4%; left:  5%; }
-  .floating-cards > .card-2{ top:  4%; left: 51%; }
-  .floating-cards > .card-3{ top: 24%; left:  5%; }
-  .floating-cards > .card-4{ top: 24%; left: 51%; }
-  .floating-cards > .card-5{ top: 44%; left:  5%; }
-  .floating-cards > .card-6{ top: 44%; left: 51%; }
-  .floating-cards > .card-7{ top: 64%; left:  5%; }
-  .floating-cards > .card-8{ top: 64%; left: 51%; }
 
-  /* Tipos menores pra caber */
+  /* Posições "orgânicas": duas colunas com leves variações */
+  /* linha 1 */
+  .card-1{ top:  4%; left: 4%;  }
+  .card-2{ top:  6%; left: 52%; }
+  /* linha 2 */
+  .card-3{ top: 24%; left: 7%;  }
+  .card-4{ top: 26%; left: 50%; }
+  /* linha 3 */
+  .card-5{ top: 47%; left: 5%;  }
+  .card-6{ top: 49%; left: 54%; }
+  /* linha 4 */
+  .card-7{ top: 70%; left: 8%;  }
+  .card-8{ top: 72%; left: 51%; }
+
+  /* Animações com delays diferentes para sensação "flutuante" */
+  .card-1{ animation: floatSoft 10s ease-in-out infinite; animation-delay: 0s;  }
+  .card-2{ animation: floatSoft 11s ease-in-out infinite; animation-delay: .7s; }
+  .card-3{ animation: floatSoft 12s ease-in-out infinite; animation-delay: .2s; }
+  .card-4{ animation: floatSoft 9.5s ease-in-out infinite; animation-delay: .9s; }
+  .card-5{ animation: floatSoft 10.5s ease-in-out infinite; animation-delay: .4s; }
+  .card-6{ animation: floatSoft 12.5s ease-in-out infinite; animation-delay: .8s; }
+  .card-7{ animation: floatSoft 11.5s ease-in-out infinite; animation-delay: .3s; }
+  .card-8{ animation: floatSoft 13s ease-in-out infinite; animation-delay: .6s; }
+
   .floating-cards > .card i   { font-size: 1.35rem !important; }
   .floating-cards > .card span{ font-size: .95rem !important; }
 }
 
 @media (max-width: 480px){
-  .floating-cards{ height: 1060px !important; }
-  .floating-cards > .card{ width: 46vw; height: 126px; }
+  .floating-cards{ height: 1180px !important; }
+  .floating-cards > .card{ width: 46vw; height: 130px; }
 }
 
-/* Flutuação suave (amplitude pequena) */
-@keyframes floatMobile{
-  0%,100%{ transform: translateY(0); }
-  50%    { transform: translateY(-6px); }
+/* Flutuação suave e curta (não desloca demais para não encostar) */
+@keyframes floatSoft{
+  0%,100%{ transform: translateY(0) translateX(0); }
+  25%   { transform: translateY(-8px) translateX(2px); }
+  50%   { transform: translateY(-12px) translateX(-2px); }
+  75%   { transform: translateY(-6px) translateX(1px); }
 }
 
-/* Texto "Sobre" mais confortável */
-@media (max-width: 768px){
-  .about-text p{ font-size: 1.05rem !important; line-height: 1.92 !important; color:#666 !important; }
-  .section-title{ font-size: 2.15rem !important; }
-}
-
-/* Logo por background (mantém logo nova) */
+/* Logo por background (mantém a nova logo) */
 .nav-logo{ min-width: 190px; height: 50px; display:flex; align-items:center;
   background: url('../images/logo-text.png') left center/contain no-repeat; }
 .nav-logo img.logo{ display:none; }
+
+/* Tipografia seção Sobre (mobile) */
+@media (max-width: 768px){
+  .about-text p{ font-size: 1.06rem !important; line-height: 1.95 !important; color:#666 !important; }
+  .section-title{ font-size: 2.15rem !important; }
+}

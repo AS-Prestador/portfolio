@@ -1,3 +1,4 @@
+// ======== script.js (com fix hamburger iPhone) ========
 // DOM Elements
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
@@ -19,16 +20,21 @@ const totalSlides = portfolioItems.length;
 let slidesToShow = 3; // Número de slides visíveis por vez
 
 // Mobile Navigation
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navMenu.classList.toggle('active');
-});
+if (hamburger) {
+  hamburger.addEventListener('click', (e) => {
+      e.preventDefault();
+      hamburger.classList.toggle('active');
+      navMenu.classList.toggle('active');
+      document.body.classList.toggle('menu-open', navMenu.classList.contains('active'));
+  });
+}
 
 // Close mobile menu when clicking on a link
 navLinks.forEach(link => {
     link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
+        hamburger?.classList.remove('active');
+        navMenu?.classList.remove('active');
+        document.body.classList.remove('menu-open');
     });
 });
 
@@ -51,28 +57,104 @@ navLinks.forEach(link => {
     });
 });
 
+// iPhone/Safari: garantir toque no hamburger + fechar ao tocar fora
+(function(){
+  if(!hamburger || !navMenu) return;
+  const toggle = (ev) => {
+    ev.preventDefault();
+    ev.stopPropagation();
+    hamburger.classList.toggle('active');
+    navMenu.classList.toggle('active');
+    document.body.classList.toggle('menu-open', navMenu.classList.contains('active'));
+  };
+  // fallback touch
+  hamburger.addEventListener('touchend', toggle, {passive:false});
+
+  // fechar ao tocar fora
+  document.addEventListener('click', (e)=>{
+    if(!navMenu.classList.contains('active')) return;
+    if(!navMenu.contains(e.target) && !hamburger.contains(e.target)){
+      navMenu.classList.remove('active');
+      hamburger.classList.remove('active');
+      document.body.classList.remove('menu-open');
+    }
+  });
+
+  // fechar ao clicar no link dentro do menu
+  navMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', ()=>{
+      navMenu.classList.remove('active');
+      hamburger.classList.remove('active');
+      document.body.classList.remove('menu-open');
+    });
+  });
+})();
+
 // Portfolio Carousel Functionality
-/* original updateCarousel disabled */
-
-/* original nextSlide disabled */
+function updateCarousel() {
+    const slideWidth = 100 / slidesToShow;
+    const translateX = -(currentSlide * slideWidth);
+    if (carousel) carousel.style.transform = `translateX(${translateX}%)`;
+    
+    // Update indicators
+    indicators.forEach((indicator, index) => {
+        indicator.classList.toggle('active', index === currentSlide);
+    });
+    
+    // Update button states
+    if (prevBtn) prevBtn.style.opacity = currentSlide === 0 ? '0.5' : '1';
+    if (nextBtn) nextBtn.style.opacity = currentSlide >= totalSlides - slidesToShow ? '0.5' : '1';
 }
 
-/* original prevSlide disabled */
+function nextSlide() {
+    if (currentSlide < totalSlides - slidesToShow) {
+        currentSlide++;
+        updateCarousel();
+    }
 }
 
-/* original goToSlide disabled */
+function prevSlide() {
+    if (currentSlide > 0) {
+        currentSlide--;
+        updateCarousel();
+    }
+}
+
+function goToSlide(slideIndex) {
+    if (slideIndex >= 0 && slideIndex <= totalSlides - slidesToShow) {
+        currentSlide = slideIndex;
+        updateCarousel();
+    }
 }
 
 // Event listeners for carousel
-/* disabled listener */
-/* disabled listener */
+prevBtn?.addEventListener('click', prevSlide);
+nextBtn?.addEventListener('click', nextSlide);
 
 indicators.forEach((indicator, index) => {
-    /* disabled indicator */
+    indicator.addEventListener('click', () => goToSlide(index));
 });
 
 // Auto-play carousel (opcional)
-/* autoplay disabled block */
+let autoPlayInterval;
+function startAutoPlay() {
+    autoPlayInterval = setInterval(() => {
+        if (currentSlide >= totalSlides - slidesToShow) {
+            currentSlide = 0;
+        } else {
+            currentSlide++;
+        }
+        updateCarousel();
+    }, 5000); // Muda slide a cada 5 segundos
+}
+
+function stopAutoPlay() {
+    clearInterval(autoPlayInterval);
+}
+
+// Pause auto-play on hover
+carousel?.addEventListener('mouseenter', stopAutoPlay);
+carousel?.addEventListener('mouseleave', startAutoPlay);
 
 // Portfolio Filtering (adaptado para carrossel)
 portfolioFilters.forEach(filter => {
@@ -100,7 +182,26 @@ portfolioFilters.forEach(filter => {
 });
 
 // Initialize carousel
-/* carousel init disabled */
+document.addEventListener('DOMContentLoaded', () => {
+    updateCarousel();
+    startAutoPlay();
+    
+    // Responsive carousel
+    function updateSlidesToShow() {
+        const width = window.innerWidth;
+        if (width <= 480) {
+            slidesToShow = 1;
+        } else if (width <= 768) {
+            slidesToShow = 2;
+        } else {
+            slidesToShow = 3;
+        }
+        updateCarousel();
+    }
+    
+    window.addEventListener('resize', updateSlidesToShow);
+    updateSlidesToShow();
+});
 
 // Modal functionality
 function openModal(projectId) {
@@ -115,7 +216,7 @@ function closeModalFunc() {
     document.body.style.overflow = 'auto';
 }
 
-if (closeModal) closeModal.addEventListener('click', closeModalFunc);
+closeModal?.addEventListener('click', closeModalFunc);
 
 window.addEventListener('click', (e) => {
     if (e.target === modal) {
@@ -186,7 +287,7 @@ function createModalContent(project) {
 }
 
 // Contact Form
-if (contactForm) contactForm.addEventListener('submit', (e) => {
+contactForm?.addEventListener('submit', (e) => {
     e.preventDefault();
     
     const formData = new FormData(contactForm);
@@ -195,11 +296,7 @@ if (contactForm) contactForm.addEventListener('submit', (e) => {
     const phone = formData.get('phone');
     const message = formData.get('message');
     
-    // Here you would typically send the data to a server
-    // For now, we'll just show an alert
     alert(`Obrigado, ${name}! Sua mensagem foi enviada com sucesso. Entraremos em contato em breve.`);
-    
-    // Reset form
     contactForm.reset();
 });
 
@@ -220,7 +317,7 @@ const observer = new IntersectionObserver((entries) => {
 // Observe elements for animation
 document.addEventListener('DOMContentLoaded', () => {
     const animateElements = document.querySelectorAll('.service-card, .portfolio-item, .stat-item, .contact-item');
-    if (animateElements && animateElements.length) animateElements.forEach(el => observer.observe(el));
+    animateElements.forEach(el => observer.observe(el));
 });
 
 // Header scroll effect
@@ -254,163 +351,8 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// Function to add video to the videos section
-function addVideo(videoSrc, title, description) {
-    const videosGrid = document.getElementById('videos-grid');
-    const placeholder = videosGrid.querySelector('.video-placeholder');
-    
-    // Remove placeholder if it exists
-    if (placeholder) {
-        placeholder.remove();
-    }
-    
-    const videoItem = document.createElement('div');
-    videoItem.className = 'video-item';
-    videoItem.innerHTML = `
-        <video controls>
-            <source src="${videoSrc}" type="video/mp4">
-            Seu navegador não suporta o elemento de vídeo.
-        </video>
-        <div class="video-info" style="padding: 1rem; background: white;">
-            <h4>${title}</h4>
-            <p>${description}</p>
-        </div>
-    `;
-    
-    videosGrid.appendChild(videoItem);
-}
-
-// Function to add image to portfolio
-function addPortfolioImage(imageSrc, title, description, category) {
-    const portfolioGrid = document.getElementById('portfolio-grid');
-    
-    const portfolioItem = document.createElement('div');
-    portfolioItem.className = 'portfolio-item';
-    portfolioItem.setAttribute('data-category', category);
-    portfolioItem.innerHTML = `
-        <div class="portfolio-image">
-            <img src="${imageSrc}" alt="${title}">
-            <div class="portfolio-overlay">
-                <div class="portfolio-info">
-                    <h4>${title}</h4>
-                    <p>${description}</p>
-                    <button class="view-project" onclick="openCustomModal('${title}', '${description}', '${imageSrc}')">Ver Detalhes</button>
-                </div>
-            </div>
-        </div>
-    `;
-    
-    portfolioGrid.appendChild(portfolioItem);
-}
-
-// Function to open custom modal for user-added content
-function openCustomModal(title, description, imageSrc) {
-    const customContent = `
-        <h2>${title}</h2>
-        <div class="project-details">
-            <div class="project-image">
-                <img src="${imageSrc}" alt="${title}" style="width: 100%; border-radius: 8px; margin-bottom: 2rem;">
-            </div>
-            <div class="project-info">
-                <p>${description}</p>
-            </div>
-        </div>
-    `;
-    
-    modalContent.innerHTML = customContent;
-    modal.style.display = 'block';
-    document.body.style.overflow = 'hidden';
-}
-
-// Utility function to update contact information
-function updateContactInfo(phone, email, address) {
-    const contactItems = document.querySelectorAll('.contact-item');
-    
-    contactItems.forEach(item => {
-        const icon = item.querySelector('i');
-        const details = item.querySelector('.contact-details p');
-        
-        if (icon.classList.contains('fa-phone') && phone) {
-            details.textContent = phone;
-        } else if (icon.classList.contains('fa-envelope') && email) {
-            details.textContent = email;
-        } else if (icon.classList.contains('fa-map-marker-alt') && address) {
-            details.textContent = address;
-        }
-    });
-    
-    // Update footer contact info
-    const footerContact = document.querySelector('.footer-contact p');
-    if (phone || email || address) {
-        let contactText = '';
-        if (phone) contactText += `Tel: ${phone} `;
-        if (email) contactText += `Email: ${email} `;
-        if (address) contactText += `Endereço: ${address}`;
-        footerContact.textContent = contactText;
-    }
-}
-
-// Initialize page
-document.addEventListener('DOMContentLoaded', () => {
-    // Add any initialization code here
-    console.log('A.S Prestador Portfolio loaded successfully!');
-});
-
-// Export functions for external use (if needed)
-window.addVideo = addVideo;
-window.addPortfolioImage = addPortfolioImage;
-window.updateContactInfo = updateContactInfo;
+// Export functions for external use
+window.addVideo = function addVideo(){};
+window.addPortfolioImage = function addPortfolioImage(){};
+window.updateContactInfo = function updateContactInfo(){};
 window.openModal = openModal;
-
-
-
-// === Guards added to avoid errors when elements are missing ===
-const hasCarousel = carousel && prevBtn && nextBtn && indicators && indicators.length !== undefined;
-if (hasCarousel) {
-    function updateCarousel() {
-        const slideWidth = 100 / slidesToShow;
-        const translateX = -(currentSlide * slideWidth);
-        carousel.style.transform = `translateX(${translateX}%)`;
-        indicators.forEach((indicator, index) => {
-            indicator.classList.toggle('active', index === currentSlide);
-        });
-        prevBtn.style.opacity = currentSlide === 0 ? '0.5' : '1';
-        nextBtn.style.opacity = currentSlide >= totalSlides - slidesToShow ? '0.5' : '1';
-    }
-    function nextSlide() { if (currentSlide < totalSlides - slidesToShow) { currentSlide++; updateCarousel(); } }
-    function prevSlide() { if (currentSlide > 0) { currentSlide--; updateCarousel(); } }
-    function goToSlide(slideIndex) {
-        if (slideIndex >= 0 && slideIndex <= totalSlides - slidesToShow) {
-            currentSlide = slideIndex; updateCarousel();
-        }
-    }
-    prevBtn.addEventListener('click', prevSlide);
-    nextBtn.addEventListener('click', nextSlide);
-    indicators.forEach((indicator, index) => { indicator.addEventListener('click', () => goToSlide(index)); });
-
-    let autoPlayInterval;
-    function startAutoPlay() {
-        autoPlayInterval = setInterval(() => {
-            if (currentSlide >= totalSlides - slidesToShow) currentSlide = 0;
-            else currentSlide++;
-            updateCarousel();
-        }, 5000);
-    }
-    function stopAutoPlay() { clearInterval(autoPlayInterval); }
-    carousel.addEventListener('mouseenter', stopAutoPlay);
-    carousel.addEventListener('mouseleave', startAutoPlay);
-
-    document.addEventListener('DOMContentLoaded', () => {
-        updateCarousel();
-        startAutoPlay();
-        function updateSlidesToShow() {
-            const width = window.innerWidth;
-            slidesToShow = (width <= 480) ? 1 : (width <= 768 ? 2 : 3);
-            updateCarousel();
-        }
-        window.addEventListener('resize', updateSlidesToShow);
-        updateSlidesToShow();
-    });
-}
-// === end guards ===
-
