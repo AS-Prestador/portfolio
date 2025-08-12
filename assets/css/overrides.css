@@ -1,104 +1,70 @@
 
-/* ===== A.S Prestador — Overrides v5 (mobile flutuante orgânico + hamburger) ===== */
+/* ===== Mobile floating cards — organic, smaller, no overlap ===== */
+@media (max-width: 480px) {
+  /* Grid em vez de absoluto para evitar colisões */
+  .floating-cards {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 26px 18px;              /* espaço suficiente para offsets sem encostar */
+    height: auto;                /* libera a altura do container */
+    padding: 6px 4px 10px;
+  }
 
-/* Evitar scroll lateral */
-html, body { max-width: 100%; overflow-x: hidden; }
-
-/* Header sempre por cima e clicável */
-.header { position: fixed !important; top:0; left:0; right:0; z-index: 5000 !important; }
-.hamburger{
-  position: relative;
-  z-index: 6000 !important;
-  width: 52px; height: 44px; padding: 8px;
-  -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
-  cursor: pointer;
-}
-.header * { pointer-events: auto !important; }
-
-/* Menu mobile abrindo pela esquerda */
-@media (max-width: 768px){
-  .nav-menu{
-    position: fixed !important;
-    top: var(--header-height, 70px) !important;
-    left: -100% !important;
-    right: 0;
+  .floating-cards .card {
+    position: relative;          /* card dentro da célula do grid */
     width: 100%;
-    z-index: 5500 !important;
-    transition: left .3s ease !important;
-  }
-  .nav-menu.active{ left: 0 !important; }
-  body.menu-open { overflow: hidden; }
-}
-
-/* Compensar header nas âncoras */
-section[id]{ scroll-margin-top: calc(var(--header-height,80px) + 12px); }
-
-/* ---- FLOATING CARDS (mobile: orgânico, sem overlap) ---- */
-@media (max-width: 768px){
-  .floating-cards{
-    position: relative !important;
-    height: 1100px !important; /* espaço para 8 cards sem sobrepor */
-    padding-top: 6px;
-  }
-  .floating-cards > .card{
-    position: absolute !important;
-    width: 44vw;             /* duas colunas, com respiro */
-    height: 126px;           /* altura fixa pra não encostar */
-    min-width: 0 !important;
-    max-width: none !important;
-    transform: none;
-    box-shadow: var(--shadow);
+    min-width: 0;
+    max-width: none;
+    border-radius: 22px;
+    padding: 14px 12px;
+    box-shadow: 0 10px 22px rgba(0,0,0,.18);
+    background: var(--white);
+    z-index: 1;
+    animation: cardBreathe 4s ease-in-out infinite alternate;
+    -webkit-tap-highlight-color: transparent;
   }
 
-  /* Posições "orgânicas": duas colunas com leves variações */
-  /* linha 1 */
-  .card-1{ top:  4%; left: 4%;  }
-  .card-2{ top:  6%; left: 52%; }
-  /* linha 2 */
-  .card-3{ top: 24%; left: 7%;  }
-  .card-4{ top: 26%; left: 50%; }
-  /* linha 3 */
-  .card-5{ top: 47%; left: 5%;  }
-  .card-6{ top: 49%; left: 54%; }
-  /* linha 4 */
-  .card-7{ top: 70%; left: 8%;  }
-  .card-8{ top: 72%; left: 51%; }
+  .floating-cards .card i {
+    font-size: 22px;
+  }
 
-  /* Animações com delays diferentes para sensação "flutuante" */
-  .card-1{ animation: floatSoft 10s ease-in-out infinite; animation-delay: 0s;  }
-  .card-2{ animation: floatSoft 11s ease-in-out infinite; animation-delay: .7s; }
-  .card-3{ animation: floatSoft 12s ease-in-out infinite; animation-delay: .2s; }
-  .card-4{ animation: floatSoft 9.5s ease-in-out infinite; animation-delay: .9s; }
-  .card-5{ animation: floatSoft 10.5s ease-in-out infinite; animation-delay: .4s; }
-  .card-6{ animation: floatSoft 12.5s ease-in-out infinite; animation-delay: .8s; }
-  .card-7{ animation: floatSoft 11.5s ease-in-out infinite; animation-delay: .3s; }
-  .card-8{ animation: floatSoft 13s ease-in-out infinite; animation-delay: .6s; }
+  .floating-cards .card span {
+    font-size: 14px;
+    line-height: 1.25;
+  }
 
-  .floating-cards > .card i   { font-size: 1.35rem !important; }
-  .floating-cards > .card span{ font-size: .95rem !important; }
+  @keyframes cardBreathe {
+    0%   { box-shadow: 0 10px 20px rgba(0,0,0,.14); }
+    100% { box-shadow: 0 18px 30px rgba(0,0,0,.22); }
+  }
+
+  /* Offsets suaves por card — dão o look mais “solto” sem sobrepor */
+  .floating-cards .card-1 { transform: translate(-4px,  2px); }
+  .floating-cards .card-2 { transform: translate( 6px, 14px); }
+  .floating-cards .card-3 { transform: translate(-8px, 10px); }
+  .floating-cards .card-4 { transform: translate( 8px, 18px); }
+  .floating-cards .card-5 { transform: translate(-6px, 12px); }
+  .floating-cards .card-6 { transform: translate( 6px, 22px); }
+  .floating-cards .card-7 { transform: translate(-10px,16px); }
+  .floating-cards .card-8 { transform: translate( 10px,24px); }
+
+  /* Ajuste de tipografia no “Sobre Mim” */
+  .about-text p {
+    font-size: 1.05rem;
+    line-height: 1.65;
+  }
+  .section-title {
+    font-size: 2.2rem;
+  }
 }
 
-@media (max-width: 480px){
-  .floating-cards{ height: 1180px !important; }
-  .floating-cards > .card{ width: 46vw; height: 130px; }
-}
-
-/* Flutuação suave e curta (não desloca demais para não encostar) */
-@keyframes floatSoft{
-  0%,100%{ transform: translateY(0) translateX(0); }
-  25%   { transform: translateY(-8px) translateX(2px); }
-  50%   { transform: translateY(-12px) translateX(-2px); }
-  75%   { transform: translateY(-6px) translateX(1px); }
-}
-
-/* Logo por background (mantém a nova logo) */
-.nav-logo{ min-width: 190px; height: 50px; display:flex; align-items:center;
-  background: url('../images/logo-text.png') left center/contain no-repeat; }
-.nav-logo img.logo{ display:none; }
-
-/* Tipografia seção Sobre (mobile) */
-@media (max-width: 768px){
-  .about-text p{ font-size: 1.06rem !important; line-height: 1.95 !important; color:#666 !important; }
-  .section-title{ font-size: 2.15rem !important; }
+/* Extra pequeno — reduz um pouquinho mais */
+@media (max-width: 360px) {
+  .floating-cards .card {
+    border-radius: 20px;
+    padding: 12px 10px;
+  }
+  .floating-cards .card i { font-size: 20px; }
+  .floating-cards .card span { font-size: 13px; }
 }
