@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A.S Prestador - Automação, Elétrica e Climatização</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/gallery.css">
+    <link rel="stylesheet" href="assets/css/overrides.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -268,6 +270,7 @@
     </section>
 
     <!-- Portfolio Section -->
+    
     <section id="portfolio" class="portfolio">
         <div class="container">
             <div class="section-header">
@@ -275,114 +278,165 @@
                 <div class="section-line"></div>
                 <p class="section-subtitle">Conheça alguns dos nossos principais projetos</p>
             </div>
-            <div class="portfolio-filters">
-                <button class="filter-btn active" data-filter="all">Todos</button>
-                <button class="filter-btn" data-filter="automacao-industrial">Automação Industrial</button>
-                <button class="filter-btn" data-filter="automacao-residencial">Automação Residencial</button>
-                <button class="filter-btn" data-filter="eletrica-industrial">Elétrica Industrial</button>
-                <button class="filter-btn" data-filter="eletrica-residencial">Elétrica Residencial</button>
-            </div>
-            <div class="portfolio-carousel-container">
-                <div class="portfolio-carousel" id="portfolio-carousel">
-                    <div class="portfolio-slide" data-category="automacao-industrial">
-                        <div class="portfolio-image">
-                            <img src="assets/images/IMG_0515.jpeg" alt="Painel de Controle Industrial" loading="lazy">
-                            <div class="portfolio-overlay">
-                                <div class="portfolio-info">
-                                    <h4>Painel de Controle Industrial</h4>
-                                    <p>Sistema de automação com interface HMI</p>
-                                    <button class="view-project" onclick="openModal('project1')">Ver Detalhes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="portfolio-slide" data-category="eletrica-industrial">
-                        <div class="portfolio-image">
-                            <img src="assets/images/IMG_0518.jpeg" alt="Subestação Elétrica" loading="lazy">
-                            <div class="portfolio-overlay">
-                                <div class="portfolio-info">
-                                    <h4>Subestação Elétrica</h4>
-                                    <p>Instalação de alta tensão com segurança</p>
-                                    <button class="view-project" onclick="openModal('project2')">Ver Detalhes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="portfolio-slide" data-category="eletrica-industrial">
-                        <div class="portfolio-image">
-                            <img src="assets/images/IMG_0517.jpeg" alt="Painel Elétrico Industrial" loading="lazy">
-                            <div class="portfolio-overlay">
-                                <div class="portfolio-info">
-                                    <h4>Painel Elétrico Industrial</h4>
-                                    <p>Controle e comando industrial</p>
-                                    <button class="view-project" onclick="openModal('project3')">Ver Detalhes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="portfolio-slide" data-category="eletrica-industrial">
-                        <div class="portfolio-image">
-                            <img src="assets/images/IMG_0519.jpeg" alt="Sala Técnica" loading="lazy">
-                            <div class="portfolio-overlay">
-                                <div class="portfolio-info">
-                                    <h4>Sala Técnica Industrial</h4>
-                                    <p>Equipamentos elétricos especializados</p>
-                                    <button class="view-project" onclick="openModal('project4')">Ver Detalhes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="portfolio-slide" data-category="eletrica-industrial">
-                        <div class="portfolio-image">
-                            <img src="assets/images/IMG_0522.jpeg" alt="Quadro Elétrico" loading="lazy">
-                            <div class="portfolio-overlay">
-                                <div class="portfolio-info">
-                                    <h4>Quadro Elétrico Industrial</h4>
-                                    <p>Instalação com disjuntores e proteções</p>
-                                    <button class="view-project" onclick="openModal('project5')">Ver Detalhes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="portfolio-slide" data-category="eletrica-industrial">
-                        <div class="portfolio-image">
-                            <img src="assets/images/IMG_0520.jpeg" alt="Equipamentos Alta Tensão" loading="lazy">
-                            <div class="portfolio-overlay">
-                                <div class="portfolio-info">
-                                    <h4>Equipamentos de Alta Tensão</h4>
-                                    <p>Instalação segura conforme normas</p>
-                                    <button class="view-project" onclick="openModal('project6')">Ver Detalhes</button>
-                                </div>
-                            </div>
-                        </div>
+
+            <section class="gallery" data-gallery>
+                <div class="gallery__head">
+                    <h3 class="gallery__title">Portfólio em Destaque</h3>
+                    <div class="gallery__controls">
+                        <button class="gallery__btn" data-prev aria-label="Anterior">←</button>
+                        <button class="gallery__btn" data-next aria-label="Próximo">→</button>
                     </div>
                 </div>
-                
-                <!-- Botões de navegação -->
-                <button class="carousel-btn carousel-btn-prev" id="prevBtn">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <button class="carousel-btn carousel-btn-next" id="nextBtn">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
-                
-                <!-- Indicadores -->
-                <div class="carousel-indicators" id="carouselIndicators">
-                    <span class="indicator active" data-slide="0"></span>
-                    <span class="indicator" data-slide="1"></span>
-                    <span class="indicator" data-slide="2"></span>
-                    <span class="indicator" data-slide="3"></span>
-                    <span class="indicator" data-slide="4"></span>
-                    <span class="indicator" data-slide="5"></span>
+                <div class="deck">
+<article class="slide">
+          <div class="slide__img-wrap">
+            <img data-src-base="assets/images/Arandela decorativa - quarto" alt="Arandela decorativa – quarto" loading="lazy">
+          </div>
+          <p class="caption">Arandela decorativa – quarto</p>
+        </article>
+<article class="slide">
+          <div class="slide__img-wrap">
+            <img data-src-base="assets/images/Arandelas decorativas" alt="Arandelas decorativas" loading="lazy">
+          </div>
+          <p class="caption">Arandelas decorativas</p>
+        </article>
+<article class="slide">
+          <div class="slide__img-wrap">
+            <img data-src-base="assets/images/Balisadores escada I" alt="Balisadores – escada I" loading="lazy">
+          </div>
+          <p class="caption">Balisadores – escada I</p>
+        </article>
+<article class="slide">
+          <div class="slide__img-wrap">
+            <img data-src-base="assets/images/Balisadores escada II" alt="Balisadores – escada II" loading="lazy">
+          </div>
+          <p class="caption">Balisadores – escada II</p>
+        </article>
+<article class="slide">
+          <div class="slide__img-wrap">
+            <img data-src-base="assets/images/Condensadoras I" alt="Condensadoras I" loading="lazy">
+          </div>
+          <p class="caption">Condensadoras I</p>
+        </article>
+<article class="slide">
+          <div class="slide__img-wrap">
+            <img data-src-base="assets/images/Condensadoras II" alt="Condensadoras II" loading="lazy">
+          </div>
+          <p class="caption">Condensadoras II</p>
+        </article>
+<article class="slide">
+          <div class="slide__img-wrap">
+            <img data-src-base="assets/images/Hack patch panels - frente" alt="Rack patch panels – frente" loading="lazy">
+          </div>
+          <p class="caption">Rack patch panels – frente</p>
+        </article>
+<article class="slide">
+          <div class="slide__img-wrap">
+            <img data-src-base="assets/images/Hack patch panels - fundo, subida dos cabos" alt="Rack patch panels – fundo (subida dos cabos)" loading="lazy">
+          </div>
+          <p class="caption">Rack patch panels – fundo (subida dos cabos)</p>
+        </article>
+<article class="slide">
+          <div class="slide__img-wrap">
+            <img data-src-base="assets/images/Hack patch panels - fundo" alt="Rack patch panels – fundo" loading="lazy">
+          </div>
+          <p class="caption">Rack patch panels – fundo</p>
+        </article>
+<article class="slide">
+          <div class="slide__img-wrap">
+            <img data-src-base="assets/images/Luminarias de pico de cinco leds" alt="Luminárias de pico de cinco LEDs" loading="lazy">
+          </div>
+          <p class="caption">Luminárias de pico de cinco LEDs</p>
+        </article>
+<article class="slide">
+          <div class="slide__img-wrap">
+            <img data-src-base="assets/images/luminotécnico - Forro de madeira I" alt="Luminotécnico – forro de madeira I" loading="lazy">
+          </div>
+          <p class="caption">Luminotécnico – forro de madeira I</p>
+        </article>
+<article class="slide">
+          <div class="slide__img-wrap">
+            <img data-src-base="assets/images/luminotécnico - Forro de madeira II" alt="Luminotécnico – forro de madeira II" loading="lazy">
+          </div>
+          <p class="caption">Luminotécnico – forro de madeira II</p>
+        </article>
+<article class="slide">
+          <div class="slide__img-wrap">
+            <img data-src-base="assets/images/luminotécnico - Hall intimo" alt="Luminotécnico – hall íntimo" loading="lazy">
+          </div>
+          <p class="caption">Luminotécnico – hall íntimo</p>
+        </article>
+<article class="slide">
+          <div class="slide__img-wrap">
+            <img data-src-base="assets/images/luminotécnico - Marcenaria" alt="Luminotécnico – marcenaria" loading="lazy">
+          </div>
+          <p class="caption">Luminotécnico – marcenaria</p>
+        </article>
+<article class="slide">
+          <div class="slide__img-wrap">
+            <img data-src-base="assets/images/luminotécnico - Suíte" alt="Luminotécnico – suíte" loading="lazy">
+          </div>
+          <p class="caption">Luminotécnico – suíte</p>
+        </article>
+<article class="slide">
+          <div class="slide__img-wrap">
+            <img data-src-base="assets/images/luminotécnico dicróica no frame" alt="Luminotécnico – dicróica no frame" loading="lazy">
+          </div>
+          <p class="caption">Luminotécnico – dicróica no frame</p>
+        </article>
+<article class="slide">
+          <div class="slide__img-wrap">
+            <img data-src-base="assets/images/Painel de controle residencial" alt="Painel de controle residencial" loading="lazy">
+          </div>
+          <p class="caption">Painel de controle residencial</p>
+        </article>
+<article class="slide">
+          <div class="slide__img-wrap">
+            <img data-src-base="assets/images/Pendentes" alt="Pendentes" loading="lazy">
+          </div>
+          <p class="caption">Pendentes</p>
+        </article>
+<article class="slide">
+          <div class="slide__img-wrap">
+            <img data-src-base="assets/images/Perfis de leds" alt="Perfis de LED" loading="lazy">
+          </div>
+          <p class="caption">Perfis de LED</p>
+        </article>
+<article class="slide">
+          <div class="slide__img-wrap">
+            <img data-src-base="assets/images/Quadro de distribuição de ar condicionado" alt="Quadro de distribuição de ar-condicionado" loading="lazy">
+          </div>
+          <p class="caption">Quadro de distribuição de ar-condicionado</p>
+        </article>
+<article class="slide">
+          <div class="slide__img-wrap">
+            <img data-src-base="assets/images/Quadro elétrico residencial" alt="Quadro elétrico residencial" loading="lazy">
+          </div>
+          <p class="caption">Quadro elétrico residencial</p>
+        </article>
+<article class="slide">
+          <div class="slide__img-wrap">
+            <img data-src-base="assets/images/Sistema de audio e video 5.1" alt="Sistema de áudio e vídeo 5.1" loading="lazy">
+          </div>
+          <p class="caption">Sistema de áudio e vídeo 5.1</p>
+        </article>
+<article class="slide">
+          <div class="slide__img-wrap">
+            <img data-src-base="assets/images/Telão de video e audio" alt="Telão de vídeo e áudio" loading="lazy">
+          </div>
+          <p class="caption">Telão de vídeo e áudio</p>
+        </article>
+<article class="slide">
+          <div class="slide__img-wrap">
+            <img data-src-base="assets/images/Paines de controle dos ventiladores" alt="Painéis de controle dos ventiladores" loading="lazy">
+          </div>
+          <p class="caption">Painéis de controle dos ventiladores</p>
+        </article>
                 </div>
-            </div>
+            </section>
         </div>
     </section>
+
 
 
 
@@ -484,26 +538,27 @@
         </div>
     </div>
 
+    <script src="assets/js/gallery.js"></script>
     <script src="assets/js/script.js"></script>
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.slide img[data-src-base]').forEach(img => {
-    const base = img.getAttribute('data-src-base');
-    const exts = (img.getAttribute('data-exts') || 'jpg,jpeg,png,webp').split(',');
-    let i = 0;
-    const tryNext = () => {
-      if (i >= exts.length) { img.alt += ' (arquivo não encontrado)'; return; }
-      const candidate = `${base}.${exts[i++].trim()}`;
-      const test = new Image();
-      test.onload = () => { img.src = candidate; };
-      test.onerror = tryNext;
-      test.src = candidate;
-    };
-    tryNext();
-  });
-});
-</script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const exts = ['jpg','JPG','jpeg','JPEG','png','PNG','webp','WEBP'];
+      document.querySelectorAll('.slide img[data-src-base]').forEach(img => {
+        const base = img.getAttribute('data-src-base');
+        let i = 0;
+        const tryNext = () => {
+          if (i >= exts.length) { img.alt += ' (arquivo não encontrado)'; return; }
+          const candidate = `${base}.${exts[i++]}`;
+          const probe = new Image();
+          probe.onload = () => { img.src = candidate; };
+          probe.onerror = tryNext;
+          probe.src = candidate;
+        };
+        tryNext();
+      });
+    });
+    </script>
 
 </body>
 </html>

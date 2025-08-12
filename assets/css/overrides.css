@@ -1,13 +1,12 @@
 
-/* ===== Overrides UNIFICADO — mantém logo nova e corrige layout geral ===== */
-
-/* 0) Anti-overflow global */
+/* ===== Overrides UNIFICADO — logo nova + layout estável ===== */
 html, body { max-width: 100%; overflow-x: hidden; }
 .container, .header, .hero, .about, .services, .portfolio, .contact, .footer { overflow-x: hidden; }
 img, video { display:block; max-width:100%; height:auto; }
+section[id]{ scroll-margin-top: var(--header-height); }
 
-/* 1) Header + Logo (usa a logo transparente logo-text.png) */
-.nav-logo .logo{ display:none; } /* esconde a antiga logo.jpg */
+/* Logo via CSS (usa logo-text*.png) */
+.nav-logo .logo{ display:none; }
 .nav-logo{ position:relative; display:flex; align-items:center; min-height:56px; }
 .nav-logo::after{
   content:"";
@@ -17,7 +16,6 @@ img, video { display:block; max-width:100%; height:auto; }
   background-position: left center;
   background-repeat: no-repeat;
   background-size: contain;
-  /* Fallback + retina */
   background-image: url('../images/logo-text.png');
   background-image: image-set(url('../images/logo-text.png') 1x, url('../images/logo-text@2x.png') 2x);
   background-image: -webkit-image-set(url('../images/logo-text.png') 1x, url('../images/logo-text@2x.png') 2x);
@@ -31,15 +29,12 @@ img, video { display:block; max-width:100%; height:auto; }
   .nav-logo::after{ width: clamp(150px, 40vw, 210px); height: 48px; }
 }
 
-/* 2) Âncoras com header fixo */
-section[id]{ scroll-margin-top: var(--header-height); }
-
-/* 3) Tipografia e espaçamentos consistentes */
+/* Tipografia e paddings */
 .section-title { font-size: clamp(1.8rem, 4.5vw, 2.6rem); line-height: 1.2; }
 .section-subtitle { font-size: clamp(1rem, 2.6vw, 1.1rem); line-height: 1.6; }
 .about, .services, .portfolio, .contact { padding: clamp(56px, 8vw, 96px) 0; }
 
-/* 4) About: estatísticas responsivas */
+/* About: estatísticas responsivas */
 .about-text p { word-wrap: break-word; }
 @media (max-width:768px){
   .about .container { padding: 0 16px; }
@@ -57,15 +52,9 @@ section[id]{ scroll-margin-top: var(--header-height); }
   .about .stat-number{ font-size:1.8rem; }
 }
 
-/* 5) Galeria coverflow — anti-overflow + centralização (sem alterar visual) */
+/* Galeria coverflow — anti-overflow + centralização */
 .gallery{ width:100%; overflow-x: clip; }
 .gallery .deck{ touch-action: pan-y; contain: layout paint; }
-.gallery .slide{ left:50%; width:100%; } /* ancora pelo centro (compatível com seu gallery.js patch 2) */
-
-/* Ajuste fino de variáveis no mobile (apenas afeta a galeria) */
-@media (max-width:600px){
-  :root{ --gap: 38px; }
-}
-@media (max-width:480px){
-  :root{ --gap: 30px; }
-}
+.gallery .slide{ left:50%; width:100%; position:absolute; }
+@media (max-width:600px){ :root{ --gap: 38px; } }
+@media (max-width:480px){ :root{ --gap: 30px; } }
